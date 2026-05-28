@@ -31,7 +31,7 @@ export function bindAppEvents(ctx) {
     resetState
   } = ctx;
 
-  document.querySelectorAll(".job-card").forEach((element) => element.addEventListener("click", () => {
+  document.querySelectorAll(".jc").forEach((element) => element.addEventListener("click", () => {
     const jobCode = element.dataset.jc;
     // 단일 선택 모드: 같은 카드를 다시 누르면 해제, 다른 카드를 누르면 교체
     if (state.selectedJobs.length === 1 && state.selectedJobs[0] === jobCode) {

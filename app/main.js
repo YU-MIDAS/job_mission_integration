@@ -117,7 +117,7 @@ function render() {
     bindEvents();
   }
 }
-function brand() { return "<div class=\"brand\"><div class=\"brand-logo\">JS</div><span class=\"brand-name\">JOBSIM</span></div>"; }
+function brand() { return ""; }
 
 function rSelect() {
   return renderSelectScreen({
@@ -163,12 +163,12 @@ function rResult() {
   const sourceWarn = nonLlmCount > 0
     ? `<div class="log-note" style="margin-bottom:16px">임시 추정 결과가 포함되어 있습니다. (비LLM 평가 ${nonLlmCount}건)</div>`
     : "";
-  return `${brand()}
-  <h1 class="stitle">미션 결과가 나왔어요!</h1>
-  <p class="sdesc">답변 패턴을 분석해서 당신만의 강점과 어울리는 직업을 찾아봤어요.</p>
+  return `<div class="eyebrow">시뮬레이션 완료</div>
+  <div class="res-h">당신의 적성 분석 결과</div>
+  <div class="res-sub">KNOW 재직자 데이터와 당신의 반응을 교차 분석했습니다</div>
   ${warn}${sourceWarn}
   ${rRadar()}${rEvidence()}${rJobIntro()}${rCompat()}${rQuad()}${rRec()}${rGap()}${rEvaluationLogSummary()}
-  <hr/><button class="btn btn-g" id="btn-restart">↺ 처음부터 다시하기</button>`;
+  <hr/><button class="btn btn-g btn-lg" id="btn-restart">↺ 처음부터 다시하기</button>`;
 }
 
 function rRadar() {
@@ -306,4 +306,14 @@ async function bootstrap() {
   }
   render();
 }
+window.goSim = function () {
+  document.getElementById("simulation").scrollIntoView({ behavior: "smooth" });
+};
+window.resetAll = function () {
+  resetState();
+  delete state.sessionId;
+  try { localStorage.removeItem("jobsim:evaluation_logs:v1"); } catch (_) {}
+  render();
+  document.getElementById("simulation").scrollIntoView({ behavior: "smooth" });
+};
 bootstrap();

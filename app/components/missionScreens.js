@@ -118,16 +118,20 @@ function renderLog(data, esc) {
 }
 
 export function renderSelectScreen({ state, jobDefs, renderBrand }) {
-  const cards = jobDefs.map((job) => `<div class="job-card${state.selectedJobs.includes(job.job_code) ? " sel" : ""}" data-jc="${job.job_code}">
-      <div class="jicon">${job.icon}</div>
-      <div class="jname">${job.job_name}</div>
-      <div class="jsub">${job.desc || "미션 기반 탐색"}</div>
+  const cards = jobDefs.map((job) => `<div class="jc${state.selectedJobs.includes(job.job_code) ? " sel" : ""}" data-jc="${job.job_code}">
+      <div class="jc-check">✓</div>
+      <div class="jc-icon">${job.icon}</div>
+      <div class="jc-name">${job.job_name}</div>
+      <div class="jc-meta">${job.desc || "미션 기반 탐색"}</div>
     </div>`).join("");
 
-  return `${renderBrand()}<h1 class="stitle">어떤 직무를 탐색할까요?</h1>
-  <p class="sdesc">직무를 1개 선택하세요.</p>
+  return `<div class="sec-head">
+    <div class="eyebrow">인터랙티브 체험</div>
+    <div class="sec-h">체험할 직무를 선택하세요</div>
+    <div class="sec-sub">직무를 1개 선택 · 직무당 약 15분 소요</div>
+  </div>
   <div class="job-grid">${cards}</div>
-  <button class="btn btn-p" id="btn-start"${state.selectedJobs.length ? " " : " disabled"}>시작하기 →</button>`;
+  <div class="fr"><button class="btn btn-p btn-lg" id="btn-start"${state.selectedJobs.length ? "" : " disabled"}>시뮬레이션 시작하기 →</button></div>`;
 }
 
 export function renderPreQuestionScreen({ state, jobDefs, renderBrand }) {
@@ -212,16 +216,32 @@ export function renderMissionScreen({
 
   const answerReady = state.missionAnswer.trim().length > 10;
 
-  return `${renderBrand()}
-  <div class="prog"><div class="prog-f" style="width:${missionProgressPct}%"></div></div>
-  <div class="mhdr"><span class="badge">${jobDef.icon} ${esc(jobDef.job_name)}</span><span class="mstep">미션 ${state.missionStepIndex + 1} / ${missionCount}</span></div>
-  <h1 class="stitle">${esc(mission.title)}</h1>
-  ${scenarioUI}
-  ${materialsUI}
-  ${tasksUI}
-  ${submitHintUI}
-  <textarea id="m-ans" rows="8" placeholder="여기에 답변을 작성하세요…">${esc(state.missionAnswer)}</textarea>
-  <div style="display:flex;gap:10px;margin-top:24px">
-    <button class="btn btn-p" id="btn-mnext"${answerReady ? "" : " disabled"}>${isLastMission ? "결과 보기 →" : "다음 →"}</button>
+  return `<div class="mis-layout">
+    <div class="mis-card">
+      <div class="mis-breadcrumb">체험 <span>/</span> 미션 수행 <span>/</span> <span>${esc(jobDef.job_name)}</span></div>
+      <div class="job-pill">${jobDef.icon} ${esc(jobDef.job_name)}</div>
+      <div class="mis-q">${esc(mission.title)}</div>
+      ${scenarioUI}
+      <div class="mis-divider"></div>
+      ${materialsUI}
+      ${tasksUI}
+    </div>
+    <div class="mis-right">
+      <div>
+        <div class="panel-lbl">진행률</div>
+        <div class="prog"><div class="prog-f" style="width:${missionProgressPct}%"></div></div>
+        <div style="font-size:12px;color:var(--t3)">미션 ${state.missionStepIndex + 1} / ${missionCount}</div>
+      </div>
+      <div class="hr"></div>
+      <div>
+        <div class="panel-lbl">Your Answer</div>
+        ${submitHintUI}
+        <textarea id="m-ans" placeholder="여기에 답변을 작성하세요…">${esc(state.missionAnswer)}</textarea>
+        <div class="char-ct">${state.missionAnswer.length}자</div>
+      </div>
+      <div class="fr">
+        <button class="btn btn-p" id="btn-mnext"${answerReady ? "" : " disabled"} style="width:100%">${isLastMission ? "결과 보기 →" : "다음 →"}</button>
+      </div>
+    </div>
   </div>`;
 }
