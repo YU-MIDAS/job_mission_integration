@@ -1,0 +1,804 @@
+{
+  "schema_version": "mission_output.v1",
+  "mission_id": "mission_K000001080_normal_001_b144211",
+  "job_identity": {
+    "job_cd": "K000001080",
+    "job_lrcl_nm": "연구직 및 공학 기술직",
+    "job_mdcl_nm": "데이터·네트워크 및 시스템 운영 전문가",
+    "job_smcl_nm": "데이터분석가(빅데이터분석가)",
+    "source_ref": {
+      "file": "K000001080/dtlGb_2.xml",
+      "field": "jobsDo",
+      "index": null
+    }
+  },
+  "target_exec_job": {
+    "exec_job_id": "exec_003",
+    "text": "대용량의 데이터를 처리하는 플랫폼을 활용하여 처리·분석한다.",
+    "source_ref": {
+      "file": "K000001080/dtlGb_2.xml",
+      "field": "jobsDo.execJob",
+      "index": 3
+    },
+    "selection_reason": "Pilot config selected exec_003."
+  },
+  "mission_facts": {
+    "org_name": "아크데이터 운영센터",
+    "domain": "사내 데이터 파이프라인 운영",
+    "period": [
+      "4/6",
+      "4/7",
+      "4/8",
+      "4/9",
+      "4/10"
+    ],
+    "trend_pattern": "야간 적재 성공률은 5일 연속 떨어지고 평균 처리시간은 꾸준히 늘었다.",
+    "main_issue": "야간 고객행동 로그 적재 작업이 수집 단계에서 재시도와 지연을 반복하며 다음날 대시보드 갱신을 늦추는 문제.",
+    "feedback_themes": [
+      "재시도 증가",
+      "오류 코드 503 집중",
+      "오전 대시보드 갱신 지연"
+    ],
+    "decision_goal": "제공된 지표와 로그를 근거로 원인을 진단하고, 이번 주에 적용할 개선 조치를 한 가지 제안한다."
+  },
+  "mission": {
+    "title": "야간 배치 지연 원인 진단과 개선안 제안",
+    "task_type": "research_and_analysis",
+    "secondary_task_types": [],
+    "difficulty": {
+      "level": "normal",
+      "label": "보통",
+      "estimated_time_minutes": 15,
+      "material_bundle_style": "light_work_material_bundle",
+      "material_count_range": [
+        2,
+        3
+      ],
+      "task_count_range": [
+        2,
+        3
+      ],
+      "answer_length_hint": "400~700자",
+      "requires_cross_material_reasoning": true,
+      "requires_tradeoff_judgment": false,
+      "requires_domain_expertise": false
+    },
+    "scenario": {
+      "role": "사내 데이터운영팀의 데이터분석가",
+      "context": "야간에 돌아가는 로그 적재 배치가 최근 늦어져 다음날 오전 대시보드가 제시간에 갱신되지 않는다. 운영팀은 원인을 빠르게 짚고 이번 주 안에 적용할 조치를 정리해 달라고 요청했다.",
+      "goal": "제공된 차트, 표, 로그를 바탕으로 지연 원인을 진단하고 우선 적용할 개선안을 제안한다.",
+      "constraints": [
+        "외부 자료나 실제 기업 정보를 쓰지 않는다.",
+        "제공된 자료만 근거로 판단한다.",
+        "실행 가능한 개선 조치와 함께 확인할 지표를 제시한다."
+      ]
+    },
+    "materials": [
+      {
+        "material_id": "mat_01",
+        "type": "chart",
+        "subtype": "추이 차트",
+        "title": "최근 5일 야간 적재 지표 추이",
+        "description": "야간 배치의 적재 성공률과 평균 처리시간을 5일간 비교한 차트다.",
+        "factual_status": "synthetic_mission_material",
+        "used_for": "성능 악화가 언제부터 시작됐는지와 어떤 지표가 함께 나빠졌는지 확인한다.",
+        "evidence_source": [
+          "정보, 자료 분석",
+          "사물, 행동, 사건 파악",
+          "수리력"
+        ],
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "period",
+          "trend_pattern",
+          "main_issue"
+        ],
+        "data": {
+          "chart_type": "line",
+          "x_axis": {
+            "label": "날짜",
+            "values": [
+              "4/6",
+              "4/7",
+              "4/8",
+              "4/9",
+              "4/10"
+            ]
+          },
+          "y_axis": {
+            "label": "수치",
+            "unit": "% / 분"
+          },
+          "series": [
+            {
+              "name": "적재 성공률(%)",
+              "values": [
+                98,
+                96,
+                93,
+                90,
+                84
+              ]
+            },
+            {
+              "name": "평균 처리시간(분)",
+              "values": [
+                41,
+                43,
+                48,
+                56,
+                67
+              ]
+            }
+          ],
+          "columns": [
+            {
+              "key": "option",
+              "label": "항목"
+            },
+            {
+              "key": "strength",
+              "label": "관찰된 강점"
+            },
+            {
+              "key": "weakness",
+              "label": "관찰된 약점"
+            },
+            {
+              "key": "priority",
+              "label": "우선순위"
+            }
+          ],
+          "rows": [],
+          "author": "아크데이터 운영센터",
+          "items": [],
+          "thread": [],
+          "entries": [],
+          "cards": []
+        },
+        "confidence": {
+          "score": 0.93,
+          "checks": {
+            "synthetic_material": true
+          },
+          "warnings": []
+        }
+      },
+      {
+        "material_id": "mat_02",
+        "type": "table",
+        "subtype": "구간 진단표",
+        "title": "파이프라인 구간별 최근 관찰",
+        "description": "수집, 변환, 집계, 보고서 구간에서 최근 확인된 상태를 정리한 표다.",
+        "factual_status": "synthetic_mission_material",
+        "used_for": "어느 구간을 먼저 손봐야 하는지 우선순위를 판단한다.",
+        "evidence_source": [
+          "정보 처리",
+          "논리적 분석",
+          "의사 결정, 문제점 해결"
+        ],
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "main_issue",
+          "feedback_themes",
+          "decision_goal"
+        ],
+        "data": {
+          "chart_type": "bar",
+          "x_axis": {
+            "label": "구간",
+            "values": [
+              "수집 단계",
+              "변환 단계",
+              "집계 단계",
+              "보고서 단계"
+            ]
+          },
+          "y_axis": {
+            "label": "우선순위",
+            "unit": "순위"
+          },
+          "series": [
+            {
+              "name": "우선순위",
+              "values": [
+                1,
+                3,
+                4,
+                2
+              ]
+            }
+          ],
+          "columns": [
+            {
+              "key": "option",
+              "label": "구간"
+            },
+            {
+              "key": "strength",
+              "label": "관찰된 강점"
+            },
+            {
+              "key": "weakness",
+              "label": "관찰된 약점"
+            },
+            {
+              "key": "priority",
+              "label": "우선순위"
+            }
+          ],
+          "rows": [
+            {
+              "option": "수집 단계",
+              "strength": "재시도 후 대부분 적재됨",
+              "weakness": "22시 이후 대기열이 빠르게 쌓임",
+              "priority": 1
+            },
+            {
+              "option": "변환 단계",
+              "strength": "평균 처리시간이 비교적 안정적",
+              "weakness": "병목 징후가 거의 없음",
+              "priority": 3
+            },
+            {
+              "option": "집계 단계",
+              "strength": "오류 발생 비중이 낮음",
+              "weakness": "지연 원인으로 보기 어려움",
+              "priority": 4
+            },
+            {
+              "option": "보고서 단계",
+              "strength": "완료 후 결과는 정상 생성됨",
+              "weakness": "입력 지연이 생기면 배포가 늦어짐",
+              "priority": 2
+            }
+          ],
+          "author": "아크데이터 운영센터",
+          "items": [],
+          "thread": [],
+          "entries": [],
+          "cards": []
+        },
+        "confidence": {
+          "score": 0.91,
+          "checks": {
+            "synthetic_material": true
+          },
+          "warnings": []
+        }
+      },
+      {
+        "material_id": "mat_03",
+        "type": "log",
+        "subtype": "운영 로그",
+        "title": "야간 적재 작업 운영 로그",
+        "description": "최근 야간 배치 실행 중 확인된 주요 이벤트와 지연 기록이다.",
+        "factual_status": "synthetic_mission_material",
+        "used_for": "오류 발생 시점과 재시도 양상을 확인해 직접 원인을 좁힌다.",
+        "evidence_source": [
+          "정보 수집",
+          "절차, 자료, 주변환경 관찰",
+          "추리력"
+        ],
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "period",
+          "main_issue",
+          "feedback_themes"
+        ],
+        "data": {
+          "chart_type": "line",
+          "x_axis": {
+            "label": "시간",
+            "values": [
+              "22:01",
+              "22:08",
+              "22:15",
+              "22:27",
+              "22:41"
+            ]
+          },
+          "y_axis": {
+            "label": "누적 지연",
+            "unit": "분"
+          },
+          "series": [
+            {
+              "name": "지연(분)",
+              "values": [
+                0,
+                6,
+                17,
+                17,
+                26
+              ]
+            }
+          ],
+          "columns": [
+            {
+              "key": "option",
+              "label": "구분"
+            },
+            {
+              "key": "strength",
+              "label": "관찰된 강점"
+            },
+            {
+              "key": "weakness",
+              "label": "관찰된 약점"
+            },
+            {
+              "key": "priority",
+              "label": "우선순위"
+            }
+          ],
+          "rows": [],
+          "author": "모니터링 시스템",
+          "items": [],
+          "thread": [],
+          "entries": [
+            {
+              "time": "22:01",
+              "actor": "배치 오케스트레이터",
+              "event": "수집 작업 시작",
+              "note": "일일 로그 120만 건 적재 요청"
+            },
+            {
+              "time": "22:08",
+              "actor": "모니터링 시스템",
+              "event": "재시도 발생",
+              "note": "연결 실패 후 3회 재시도"
+            },
+            {
+              "time": "22:15",
+              "actor": "수집 API",
+              "event": "오류 코드 503",
+              "note": "응답 지연으로 11분 대기"
+            },
+            {
+              "time": "22:27",
+              "actor": "운영 담당",
+              "event": "지연 확인",
+              "note": "변환 단계는 대기 상태로 전환"
+            },
+            {
+              "time": "22:41",
+              "actor": "배치 오케스트레이터",
+              "event": "적재 완료",
+              "note": "예상 완료 시각보다 26분 늦음"
+            }
+          ],
+          "cards": []
+        },
+        "confidence": {
+          "score": 0.95,
+          "checks": {
+            "synthetic_material": true
+          },
+          "warnings": []
+        }
+      }
+    ],
+    "tasks": [
+      {
+        "task_id": "task_01",
+        "instruction": "차트와 로그를 함께 보고 야간 적재 지연의 직접 원인을 한 문장으로 진단하라.",
+        "required_materials": [
+          "mat_01",
+          "mat_03"
+        ],
+        "expected_action": "원인 진단"
+      },
+      {
+        "task_id": "task_02",
+        "instruction": "표와 차트를 근거로 우선 손볼 구간을 하나 고르고, 이번 주에 적용할 개선 조치를 한 가지 제안하라. 다음날 확인할 지표도 하나 덧붙여라.",
+        "required_materials": [
+          "mat_01",
+          "mat_02",
+          "mat_03"
+        ],
+        "expected_action": "개선안 제안"
+      }
+    ],
+    "submission_format": {
+      "type": "서술형",
+      "estimated_time_minutes": 15,
+      "required_sections": [
+        "원인 진단",
+        "우선 조치",
+        "확인 지표"
+      ],
+      "length_hint": "400~700자"
+    }
+  },
+  "evaluation": {
+    "expected_insights": [
+      "수집 단계에서 재시도와 503 오류가 발생하며 적재 성공률이 떨어지고 처리시간이 늘어났음을 파악해야 한다.",
+      "표의 우선순위와 로그를 연결해 변환이나 집계보다 수집 단계가 우선 개선 대상임을 판단해야 한다.",
+      "개선안은 수집 단계의 처리 부담을 줄이거나 재시도 비용을 낮추는 식으로 구체적이어야 하며, 성공률이나 처리시간 같은 확인 지표를 함께 제시해야 한다."
+    ],
+    "rubric": [
+      {
+        "criterion": "원인 식별의 정확성",
+        "description": "차트와 로그를 연결해 수집 단계의 재시도와 503 오류를 핵심 원인으로 짚는가.",
+        "points": 45,
+        "linked_evidence": [
+          "정보 수집",
+          "정보 처리",
+          "사물, 행동, 사건 파악",
+          "정보, 자료 분석"
+        ]
+      },
+      {
+        "criterion": "우선 조치 선택",
+        "description": "표의 우선순위를 반영해 수집 단계 개선을 먼저 해야 한다는 판단을 제시하는가.",
+        "points": 35,
+        "linked_evidence": [
+          "의사 결정, 문제점 해결",
+          "논리적 분석",
+          "목표, 전략 수립"
+        ]
+      },
+      {
+        "criterion": "실행 가능성",
+        "description": "개선안과 확인 지표가 구체적이고 다음 점검에 바로 쓸 수 있게 제시되는가.",
+        "points": 20,
+        "linked_evidence": [
+          "절차, 자료, 주변환경 관찰",
+          "컴퓨터 업무",
+          "기술 분석"
+        ]
+      }
+    ]
+  },
+  "reliability": {
+    "score": 1.0,
+    "raw_score": 100,
+    "passed": true,
+    "calculated_by": "validator.v1",
+    "human_review_required": true,
+    "warning_count": 0,
+    "fail_count": 0,
+    "repair_count": 0,
+    "score_breakdown": {
+      "schema": {
+        "max": 20,
+        "earned": 20
+      },
+      "system_decisions": {
+        "max": 15,
+        "earned": 15
+      },
+      "materials": {
+        "max": 20,
+        "earned": 20
+      },
+      "mission_facts": {
+        "max": 15,
+        "earned": 15
+      },
+      "evidence": {
+        "max": 20,
+        "earned": 20
+      },
+      "evaluation": {
+        "max": 10,
+        "earned": 10
+      }
+    }
+  },
+  "evidence_chain": {
+    "created_by": "validator.v1",
+    "source_exec_job": {
+      "exec_job_id": "exec_003",
+      "text": "대용량의 데이터를 처리하는 플랫폼을 활용하여 처리·분석한다.",
+      "source_ref": {
+        "file": "K000001080/dtlGb_2.xml",
+        "field": "jobsDo.execJob",
+        "index": 3
+      },
+      "selection_reason": "Pilot config selected exec_003."
+    },
+    "linked_evidence": {
+      "activities": [
+        {
+          "name": "정보 수집",
+          "score": 97,
+          "description": "모든 관련 자료에서 정보를 수집, 관찰하기 중요도",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 1
+          }
+        },
+        {
+          "name": "정보 처리",
+          "score": 95,
+          "description": "정보 또는 자료를 수집, 분류, 계산, 검증하거나 표로 만들기 활동 중요도",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 2
+          }
+        },
+        {
+          "name": "사물, 행동, 사건 파악",
+          "score": 95,
+          "description": "차이점과 유사점을 분류하고 어떤 상황에서 변화를 알아차림으로써 정보를 파악하기 활동 중요도",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 3
+          }
+        },
+        {
+          "name": "컴퓨터 업무",
+          "score": 95,
+          "description": "프로그램 제작, 소프트웨어 저작, 기능 설정, 정보 입력, 정보 처리를 하기 위한 컴퓨터 시스템 사용하기 활동 중요도",
+          "rank": 4,
+          "source_ref": {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 4
+          }
+        },
+        {
+          "name": "의사 결정, 문제점 해결",
+          "score": 93,
+          "description": "가장 좋은 해결책을 선택하기 위해 정보를 분석하고 문제점을 해결하기 위해 결과를 평가하기 활동 중요도",
+          "rank": 5,
+          "source_ref": {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 5
+          }
+        }
+      ],
+      "abilities": [
+        {
+          "name": "수리력",
+          "score": 96,
+          "description": "어떤 문제를 해결하기 위해 수학을 사용한다",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 1
+          }
+        },
+        {
+          "name": "전산",
+          "score": 95,
+          "description": "다양한 목적을 위해 소프트웨어나 인터넷을 활용하거나 프로그램을 작성한다",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 2
+          }
+        },
+        {
+          "name": "논리적 분석",
+          "score": 92,
+          "description": "문제를 해결하기 위해(혹은 의사결정을 하기 위해) 체계적으로 이치에 맞는 생각을 해낸다",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 3
+          }
+        }
+      ],
+      "knowledge": [
+        {
+          "name": "산수와 수학",
+          "score": 93,
+          "description": "연산, 대수학, 통계, 기하학의 계산 및 응용에 관한 지식",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 1
+          }
+        },
+        {
+          "name": "컴퓨터와 전자공학",
+          "score": 87,
+          "description": "컴퓨터의 하드웨어, 회로판, 처리장치, 반도체, 전자장비에 관한 지식",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 2
+          }
+        },
+        {
+          "name": "영어",
+          "score": 75,
+          "description": "영어를 읽고, 쓰고, 듣고 말하는데 필요한 지식",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 3
+          }
+        }
+      ],
+      "work_environment": [
+        {
+          "name": "재택근무",
+          "score": 98,
+          "description": "재택근무 가능성",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobsEnv",
+            "index": 1
+          }
+        },
+        {
+          "name": "앉아서 근무",
+          "score": 91,
+          "description": "앉아서 근무하는 빈도",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobsEnv",
+            "index": 2
+          }
+        },
+        {
+          "name": "연설, 발표, 회의하기",
+          "score": 84,
+          "description": "사람들 앞에서 공식적으로 연설(발표,회의 등의 상황)",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobsEnv",
+            "index": 3
+          }
+        }
+      ]
+    },
+    "material_evidence_map": [
+      {
+        "material_id": "mat_01",
+        "supported_by": [
+          "정보, 자료 분석",
+          "사물, 행동, 사건 파악",
+          "수리력"
+        ]
+      },
+      {
+        "material_id": "mat_02",
+        "supported_by": [
+          "정보 처리",
+          "논리적 분석",
+          "의사 결정, 문제점 해결"
+        ]
+      },
+      {
+        "material_id": "mat_03",
+        "supported_by": [
+          "정보 수집",
+          "절차, 자료, 주변환경 관찰",
+          "추리력"
+        ]
+      }
+    ],
+    "items": [
+      {
+        "target_type": "material",
+        "target_id": "mat_01",
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "period",
+          "trend_pattern",
+          "main_issue"
+        ],
+        "source_refs": [
+          {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 6,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 3,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 1,
+            "source_root": "data/api_raw"
+          }
+        ],
+        "connection_reason": "직업 profile evidence와 생성 자료가 간접 연결됨",
+        "traceability": "indirect"
+      },
+      {
+        "target_type": "material",
+        "target_id": "mat_02",
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "main_issue",
+          "feedback_themes",
+          "decision_goal"
+        ],
+        "source_refs": [
+          {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 2,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 3,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 5,
+            "source_root": "data/api_raw"
+          }
+        ],
+        "connection_reason": "직업 profile evidence와 생성 자료가 간접 연결됨",
+        "traceability": "indirect"
+      },
+      {
+        "target_type": "material",
+        "target_id": "mat_03",
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "period",
+          "main_issue",
+          "feedback_themes"
+        ],
+        "source_refs": [
+          {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 1,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 7,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 4,
+            "source_root": "data/api_raw"
+          }
+        ],
+        "connection_reason": "직업 profile evidence와 생성 자료가 간접 연결됨",
+        "traceability": "indirect"
+      }
+    ]
+  },
+  "axis_signals_derived": {
+    "AX1": 0.5875,
+    "AX2": 0.1792,
+    "AX3": 0.2333,
+    "AX4": 0.0,
+    "AX5": 0.0
+  }
+}

@@ -1,0 +1,788 @@
+{
+  "schema_version": "mission_output.v1",
+  "mission_id": "mission_K000000997_normal_001_b224708",
+  "job_identity": {
+    "job_cd": "K000000997",
+    "job_lrcl_nm": "경영·사무·금융·보험직",
+    "job_mdcl_nm": "광고·조사·상품기획·행사기획 전문가",
+    "job_smcl_nm": "상품기획자",
+    "source_ref": {
+      "file": "K000000997/dtlGb_2.xml",
+      "field": "jobsDo",
+      "index": null
+    }
+  },
+  "target_exec_job": {
+    "exec_job_id": "exec_004",
+    "text": "특정상품 및 서비스에 관한 현재의 판매수준, 소비자의 평가 등에 관한 정보를 체계적으로 수집·분석한다.",
+    "source_ref": {
+      "file": "K000000997/dtlGb_2.xml",
+      "field": "jobsDo.execJob",
+      "index": 4
+    },
+    "selection_reason": "Pilot config selected exec_004."
+  },
+  "mission_facts": {
+    "org_name": "오름플랜 기획실",
+    "domain": "소형 취미 키트 상품",
+    "period": [
+      "2026년 2월",
+      "2026년 3월",
+      "2026년 4월",
+      "2026년 5월",
+      "2026년 6월"
+    ],
+    "trend_pattern": "입문자용 후보의 관심도는 꾸준히 상승하고, 심화형 후보는 정체에서 소폭 하락으로 이어진다.",
+    "main_issue": "두 후보 타깃 중 어디를 먼저 공략할지 정해야 한다.",
+    "feedback_themes": [
+      "처음 시작하기 쉽다는 반응이 많다",
+      "가격 대비 구성품이 적다는 의견이 있다",
+      "짧은 시간에 끝나는 상품을 선호한다",
+      "다음 단계 상품이 있으면 좋겠다는 요청이 있다"
+    ],
+    "decision_goal": "고객 반응과 판매 흐름을 근거로 우선 공략할 시장과 타깃을 1순위로 정하고 다음 상품 방향을 제안한다."
+  },
+  "mission": {
+    "title": "시장 반응을 보고 우선 타깃 정하기",
+    "task_type": "research_and_analysis",
+    "secondary_task_types": [
+      "decision_making"
+    ],
+    "difficulty": {
+      "level": "normal",
+      "label": "보통",
+      "estimated_time_minutes": 15,
+      "material_bundle_style": "light_work_material_bundle",
+      "material_count_range": [
+        2,
+        3
+      ],
+      "task_count_range": [
+        2,
+        3
+      ],
+      "answer_length_hint": "400~700자",
+      "requires_cross_material_reasoning": true,
+      "requires_tradeoff_judgment": false,
+      "requires_domain_expertise": false
+    },
+    "scenario": {
+      "role": "신입 상품기획자",
+      "context": "사내 마케터와 함께 신규 소형 취미 키트 상품을 검토하는 상황이다. 시장 반응과 고객 의견을 함께 보고, 어떤 타깃을 먼저 공략할지 정해야 한다.",
+      "goal": "제공된 자료만 근거로 우선 공략할 시장과 타깃 1개를 고르고, 다음 실행 제안을 정리한다.",
+      "constraints": [
+        "실제 회사명, 브랜드명, 인명은 쓰지 않는다.",
+        "주어진 자료 밖의 사실은 추측해서 단정하지 않는다.",
+        "우선 공략 타깃은 1개만 정한다.",
+        "고객 반응과 판매 흐름을 함께 연결해 설명한다."
+      ]
+    },
+    "materials": [
+      {
+        "material_id": "mat_01",
+        "type": "chart",
+        "subtype": "관심도 추이",
+        "title": "후보 타깃 관심도 추이",
+        "description": "최근 5개월 동안 두 후보 타깃의 관심도 변화를 비교한 차트이다.",
+        "factual_status": "synthetic_mission_material",
+        "used_for": "어느 타깃의 관심도가 더 빠르게 커지는지 판단한다.",
+        "evidence_source": [
+          "정보 수집",
+          "사물, 행동, 사건 파악",
+          "업무 계획, 우선순위 결정"
+        ],
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "period",
+          "trend_pattern",
+          "main_issue",
+          "decision_goal"
+        ],
+        "data": {
+          "chart_type": "line",
+          "x_axis": {
+            "label": "월",
+            "values": [
+              "2월",
+              "3월",
+              "4월",
+              "5월",
+              "6월"
+            ]
+          },
+          "y_axis": {
+            "label": "관심도 지수",
+            "unit": "점"
+          },
+          "series": [
+            {
+              "name": "입문자용 10분 완성 키트",
+              "values": [
+                48,
+                52,
+                57,
+                63,
+                70
+              ]
+            },
+            {
+              "name": "주말 심화 키트",
+              "values": [
+                64,
+                62,
+                60,
+                58,
+                57
+              ]
+            }
+          ],
+          "columns": [
+            {
+              "key": "option",
+              "label": "대상"
+            },
+            {
+              "key": "strength",
+              "label": "강점"
+            },
+            {
+              "key": "weakness",
+              "label": "약점"
+            },
+            {
+              "key": "priority",
+              "label": "우선순위"
+            }
+          ],
+          "rows": [],
+          "author": "오름플랜 리서치팀",
+          "items": [],
+          "thread": [],
+          "entries": [],
+          "cards": []
+        },
+        "confidence": {
+          "score": 0.94,
+          "checks": {
+            "synthetic_material": true
+          },
+          "warnings": []
+        }
+      },
+      {
+        "material_id": "mat_02",
+        "type": "memo",
+        "subtype": "고객 반응 메모",
+        "title": "고객 리뷰·고객 데이터 메모",
+        "description": "최근 설문과 상담 기록을 묶어 고객 반응을 요약한 메모이다.",
+        "factual_status": "synthetic_mission_material",
+        "used_for": "고객이 무엇을 좋아하고 불편해하는지 해석한다.",
+        "evidence_source": [
+          "정보 수집",
+          "사물, 서비스, 사람의 질 판단",
+          "사물, 행동, 사건 파악"
+        ],
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "period",
+          "feedback_themes",
+          "main_issue",
+          "decision_goal"
+        ],
+        "data": {
+          "chart_type": "bar",
+          "x_axis": {
+            "label": "",
+            "values": []
+          },
+          "y_axis": {
+            "label": "",
+            "unit": ""
+          },
+          "series": [],
+          "columns": [
+            {
+              "key": "option",
+              "label": "항목"
+            },
+            {
+              "key": "strength",
+              "label": "좋은 반응"
+            },
+            {
+              "key": "weakness",
+              "label": "불편 반응"
+            },
+            {
+              "key": "priority",
+              "label": "시사점"
+            }
+          ],
+          "rows": [],
+          "author": "오름플랜 리서치팀",
+          "items": [
+            {
+              "text": "처음 해보는 사람도 설명이 쉬워서 바로 시작할 수 있었다는 반응이 많다.",
+              "period": "최근 2주",
+              "task": "해석",
+              "constraint": "입문 장벽",
+              "label": "입문 편의",
+              "status": "checked",
+              "importance": "높음"
+            },
+            {
+              "text": "가격은 크게 문제되지 않지만 구성품이 조금 적게 느껴진다는 의견이 있다.",
+              "period": "최근 2주",
+              "task": "해석",
+              "constraint": "가성비",
+              "label": "구성 만족도",
+              "status": "issue",
+              "importance": "높음"
+            },
+            {
+              "text": "완성 시간이 10~15분 정도라 평일 저녁에 쓰기 좋다는 반응이 있다.",
+              "period": "최근 2주",
+              "task": "해석",
+              "constraint": "사용 시간",
+              "label": "짧은 체험",
+              "status": "checked",
+              "importance": "중간"
+            },
+            {
+              "text": "난이도를 더 높이기보다 다음 단계 상품이 있으면 좋겠다는 의견이 많다.",
+              "period": "최근 2주",
+              "task": "해석",
+              "constraint": "재구매",
+              "label": "후속 상품 수요",
+              "status": "checked",
+              "importance": "높음"
+            }
+          ],
+          "thread": [],
+          "entries": [],
+          "cards": []
+        },
+        "confidence": {
+          "score": 0.92,
+          "checks": {
+            "synthetic_material": true
+          },
+          "warnings": []
+        }
+      },
+      {
+        "material_id": "mat_03",
+        "type": "table",
+        "subtype": "후보안 비교표",
+        "title": "우선 공략 후보 비교표",
+        "description": "우선 공략할 세 가지 상품 방향을 강점, 약점, 우선순위로 비교한 표이다.",
+        "factual_status": "synthetic_mission_material",
+        "used_for": "자료를 종합해 1순위 후보를 고른다.",
+        "evidence_source": [
+          "의사 결정, 문제점 해결",
+          "업무 계획, 우선순위 결정",
+          "목표, 전략 수립"
+        ],
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "main_issue",
+          "decision_goal",
+          "feedback_themes"
+        ],
+        "data": {
+          "chart_type": "bar",
+          "x_axis": {
+            "label": "",
+            "values": []
+          },
+          "y_axis": {
+            "label": "",
+            "unit": ""
+          },
+          "series": [],
+          "columns": [
+            {
+              "key": "option",
+              "label": "후보안"
+            },
+            {
+              "key": "strength",
+              "label": "강점"
+            },
+            {
+              "key": "weakness",
+              "label": "약점"
+            },
+            {
+              "key": "priority",
+              "label": "비교 우선순위"
+            }
+          ],
+          "rows": [
+            {
+              "option": "입문자용 10분 완성 키트",
+              "strength": "관심도 상승이 뚜렷하고 처음 구매로 연결되기 쉽다.",
+              "weakness": "단가를 크게 올리기 어렵다.",
+              "priority": 1
+            },
+            {
+              "option": "주말 심화 키트",
+              "strength": "체험 만족도가 높고 구성 확장 여지가 있다.",
+              "weakness": "설명이 복잡해 첫 진입 장벽이 높다.",
+              "priority": 3
+            },
+            {
+              "option": "선물용 소포장 키트",
+              "strength": "시즌성 수요를 만들기 쉽다.",
+              "weakness": "재구매 흐름으로 이어지기 약하다.",
+              "priority": 2
+            }
+          ],
+          "author": "오름플랜 기획실",
+          "items": [],
+          "thread": [],
+          "entries": [],
+          "cards": []
+        },
+        "confidence": {
+          "score": 0.91,
+          "checks": {
+            "synthetic_material": true
+          },
+          "warnings": []
+        }
+      }
+    ],
+    "tasks": [
+      {
+        "task_id": "task_01",
+        "instruction": "차트와 메모를 함께 보고, 지금 가장 먼저 확인해야 할 변화나 문제를 1~2개로 정리하세요.",
+        "required_materials": [
+          "mat_01",
+          "mat_02"
+        ],
+        "expected_action": "observe"
+      },
+      {
+        "task_id": "task_02",
+        "instruction": "차트, 메모, 비교표를 연결해 어떤 타깃을 우선 공략하는 것이 더 적절한지 판단하고, 근거를 두 가지로 설명하세요.",
+        "required_materials": [
+          "mat_01",
+          "mat_02",
+          "mat_03"
+        ],
+        "expected_action": "compare"
+      },
+      {
+        "task_id": "task_03",
+        "instruction": "상품 기획서 초안으로 우선 공략 타깃 1개와 다음 실행 제안을 제시하세요. 실행 제안에는 고객 니즈와 보완 포인트를 함께 적으세요.",
+        "required_materials": [
+          "mat_02",
+          "mat_03"
+        ],
+        "expected_action": "recommend"
+      }
+    ],
+    "submission_format": {
+      "type": "상품 기획서 초안",
+      "estimated_time_minutes": 15,
+      "required_sections": [
+        "우선 공략 타깃",
+        "근거 요약",
+        "다음 실행 제안"
+      ],
+      "length_hint": "400~700자"
+    }
+  },
+  "evaluation": {
+    "expected_insights": [
+      "입문자용 타깃의 관심도 상승과 긍정 반응이 서로 맞물린다.",
+      "심화형 후보는 만족도는 있지만 첫 공략 타깃으로는 진입 장벽이 높다.",
+      "우선 타깃을 하나로 좁히고 다음 단계 보완안을 함께 제시해야 한다."
+    ],
+    "rubric": [
+      {
+        "criterion": "자료 해석 정확성",
+        "description": "차트와 메모의 흐름을 연결해 핵심 변화와 고객 반응을 정확히 짚는다.",
+        "points": 40,
+        "linked_evidence": [
+          "정보 수집",
+          "사물, 행동, 사건 파악",
+          "사물, 서비스, 사람의 질 판단"
+        ]
+      },
+      {
+        "criterion": "우선순위 판단",
+        "description": "후보 타깃을 비교해 어느 시장을 먼저 공략할지 자료 근거로 판단한다.",
+        "points": 35,
+        "linked_evidence": [
+          "의사 결정, 문제점 해결",
+          "업무 계획, 우선순위 결정",
+          "목표, 전략 수립"
+        ]
+      },
+      {
+        "criterion": "실행 제안의 구체성",
+        "description": "상품 기획서 초안으로 다음 행동과 보완 포인트를 한 가지로 정리한다.",
+        "points": 25,
+        "linked_evidence": [
+          "창조적 생각",
+          "사람들의 업무와 활동을 조직, 편성",
+          "설득"
+        ]
+      }
+    ]
+  },
+  "reliability": {
+    "score": 1.0,
+    "raw_score": 100,
+    "passed": true,
+    "calculated_by": "validator.v1",
+    "human_review_required": true,
+    "warning_count": 0,
+    "fail_count": 0,
+    "repair_count": 0,
+    "score_breakdown": {
+      "schema": {
+        "max": 20,
+        "earned": 20
+      },
+      "system_decisions": {
+        "max": 15,
+        "earned": 15
+      },
+      "materials": {
+        "max": 20,
+        "earned": 20
+      },
+      "mission_facts": {
+        "max": 15,
+        "earned": 15
+      },
+      "evidence": {
+        "max": 20,
+        "earned": 20
+      },
+      "evaluation": {
+        "max": 10,
+        "earned": 10
+      }
+    }
+  },
+  "evidence_chain": {
+    "created_by": "validator.v1",
+    "source_exec_job": {
+      "exec_job_id": "exec_004",
+      "text": "특정상품 및 서비스에 관한 현재의 판매수준, 소비자의 평가 등에 관한 정보를 체계적으로 수집·분석한다.",
+      "source_ref": {
+        "file": "K000000997/dtlGb_2.xml",
+        "field": "jobsDo.execJob",
+        "index": 4
+      },
+      "selection_reason": "Pilot config selected exec_004."
+    },
+    "linked_evidence": {
+      "activities": [
+        {
+          "name": "업무, 활동에 대한 일정관리",
+          "score": 98,
+          "description": "이벤트, 프로그램, 활동에 대한 일정을 관리하기 활동 중요도",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 1
+          }
+        },
+        {
+          "name": "사물, 행동, 사건 파악",
+          "score": 97,
+          "description": "차이점과 유사점을 분류하고 어떤 상황에서 변화를 알아차림으로써 정보를 파악하기 활동 중요도",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 2
+          }
+        },
+        {
+          "name": "목표, 전략 수립",
+          "score": 95,
+          "description": "장기 목표를 세우고 그 목표를 달성하기 위한 전략과 실행할 목록을 명시하기 활동 중요도",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 3
+          }
+        },
+        {
+          "name": "의사 결정, 문제점 해결",
+          "score": 95,
+          "description": "가장 좋은 해결책을 선택하기 위해 정보를 분석하고 문제점을 해결하기 위해 결과를 평가하기 활동 중요도",
+          "rank": 4,
+          "source_ref": {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 4
+          }
+        },
+        {
+          "name": "창조적 생각",
+          "score": 95,
+          "description": "새로운 소프트웨어, 생각, 시스템, 제품 등을 설계하고 개발하기 활동 중요도",
+          "rank": 5,
+          "source_ref": {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 5
+          }
+        }
+      ],
+      "abilities": [
+        {
+          "name": "창의력",
+          "score": 91,
+          "description": "주어진 주제나 상황에 대하여 독특하고 기발한 아이디어를 산출한다",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 1
+          }
+        },
+        {
+          "name": "협상",
+          "score": 75,
+          "description": "사람들과의 의견차이를 좁혀 합의점을 찾는다",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 2
+          }
+        },
+        {
+          "name": "말하기",
+          "score": 73,
+          "description": "자기가 알고 있는 것을 다른 사람에게 조리있게 말한다",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 3
+          }
+        }
+      ],
+      "knowledge": [
+        {
+          "name": "영업과 마케팅",
+          "score": 91,
+          "description": "상품이나 서비스를 판매하거나 촉진을 하는 것에 관한 지식(마케팅 전략, 상품의 전시와 판매기법, 영업관리 등)",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 1
+          }
+        },
+        {
+          "name": "상품 제조 및 공정",
+          "score": 86,
+          "description": "상품의 제조 및 유통을 효율적으로 하기 위해 필요한 원자재, 제조공정, 품질관리, 비용에 관한 지식",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 2
+          }
+        },
+        {
+          "name": "디자인",
+          "score": 84,
+          "description": "밑그림, 제도와 같이 디자인에 필요한 기법 및 도구에 관한 지식",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 3
+          }
+        }
+      ],
+      "work_environment": [
+        {
+          "name": "재택근무",
+          "score": 92,
+          "description": "재택근무 가능성",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobsEnv",
+            "index": 1
+          }
+        },
+        {
+          "name": "다른 사람들을 조율하거나 이끌기",
+          "score": 91,
+          "description": "업무 특성상 다른 사람들을 조율하거나 이끄는 것의 중요성",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobsEnv",
+            "index": 2
+          }
+        },
+        {
+          "name": "이메일 이용하기",
+          "score": 90,
+          "description": "업무 수행하면서 이메일 사용하는 정도",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobsEnv",
+            "index": 3
+          }
+        }
+      ]
+    },
+    "material_evidence_map": [
+      {
+        "material_id": "mat_01",
+        "supported_by": [
+          "정보 수집",
+          "사물, 행동, 사건 파악",
+          "업무 계획, 우선순위 결정"
+        ]
+      },
+      {
+        "material_id": "mat_02",
+        "supported_by": [
+          "정보 수집",
+          "사물, 서비스, 사람의 질 판단",
+          "사물, 행동, 사건 파악"
+        ]
+      },
+      {
+        "material_id": "mat_03",
+        "supported_by": [
+          "의사 결정, 문제점 해결",
+          "업무 계획, 우선순위 결정",
+          "목표, 전략 수립"
+        ]
+      }
+    ],
+    "items": [
+      {
+        "target_type": "material",
+        "target_id": "mat_01",
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "period",
+          "trend_pattern",
+          "main_issue",
+          "decision_goal"
+        ],
+        "source_refs": [
+          {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 6,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 2,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 10,
+            "source_root": "data/api_raw"
+          }
+        ],
+        "connection_reason": "직업 profile evidence와 생성 자료가 간접 연결됨",
+        "traceability": "indirect"
+      },
+      {
+        "target_type": "material",
+        "target_id": "mat_02",
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "period",
+          "feedback_themes",
+          "main_issue",
+          "decision_goal"
+        ],
+        "source_refs": [
+          {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 6,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 9,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 2,
+            "source_root": "data/api_raw"
+          }
+        ],
+        "connection_reason": "직업 profile evidence와 생성 자료가 간접 연결됨",
+        "traceability": "indirect"
+      },
+      {
+        "target_type": "material",
+        "target_id": "mat_03",
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "main_issue",
+          "decision_goal",
+          "feedback_themes"
+        ],
+        "source_refs": [
+          {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 4,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 10,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 3,
+            "source_root": "data/api_raw"
+          }
+        ],
+        "connection_reason": "직업 profile evidence와 생성 자료가 간접 연결됨",
+        "traceability": "indirect"
+      }
+    ]
+  },
+  "axis_signals_derived": {
+    "AX1": 0.1333,
+    "AX2": 0.2667,
+    "AX3": 0.4333,
+    "AX4": 0.0833,
+    "AX5": 0.0833
+  }
+}

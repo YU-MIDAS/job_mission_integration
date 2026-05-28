@@ -1,0 +1,866 @@
+{
+  "schema_version": "mission_output.v1",
+  "mission_id": "mission_K000001080_normal_001_b224708",
+  "job_identity": {
+    "job_cd": "K000001080",
+    "job_lrcl_nm": "연구직 및 공학 기술직",
+    "job_mdcl_nm": "데이터·네트워크 및 시스템 운영 전문가",
+    "job_smcl_nm": "데이터분석가(빅데이터분석가)",
+    "source_ref": {
+      "file": "K000001080/dtlGb_2.xml",
+      "field": "jobsDo",
+      "index": null
+    }
+  },
+  "target_exec_job": {
+    "exec_job_id": "exec_003",
+    "text": "대용량의 데이터를 처리하는 플랫폼을 활용하여 처리·분석한다.",
+    "source_ref": {
+      "file": "K000001080/dtlGb_2.xml",
+      "field": "jobsDo.execJob",
+      "index": 3
+    },
+    "selection_reason": "Pilot config selected exec_003."
+  },
+  "mission_facts": {
+    "org_name": "세움서비스랩",
+    "domain": "모바일 구독형 서비스 데이터 분석",
+    "period": [
+      "최근 5주"
+    ],
+    "trend_pattern": "방문수는 꾸준히 증가했지만 주문수는 거의 정체되어 있고, 재방문율은 소폭 상승했다.",
+    "main_issue": "유입 확대에 비해 주문 전환이 따라오지 않아 주 KPI를 무엇으로 둘지 다시 정해야 한다.",
+    "feedback_themes": [
+      "방문 대비 주문 효율이 낮다",
+      "재방문은 늘지만 구매로 이어지지 않는다",
+      "이벤트 수집 오류는 크지 않다"
+    ],
+    "decision_goal": "주간 대시보드의 핵심 KPI 1개와 보조 지표를 정해 팀의 다음 분석 방향을 확정한다."
+  },
+  "mission": {
+    "title": "주문 정체 원인 진단과 주 KPI 재설계",
+    "task_type": "research_and_analysis",
+    "secondary_task_types": [],
+    "difficulty": {
+      "level": "normal",
+      "label": "보통",
+      "estimated_time_minutes": 15,
+      "material_bundle_style": "light_work_material_bundle",
+      "material_count_range": [
+        2,
+        3
+      ],
+      "task_count_range": [
+        2,
+        3
+      ],
+      "answer_length_hint": "400~700자",
+      "requires_cross_material_reasoning": true,
+      "requires_tradeoff_judgment": false,
+      "requires_domain_expertise": false
+    },
+    "scenario": {
+      "role": "주니어 데이터분석가",
+      "context": "세움서비스랩의 PM / PD / 엔지니어가 주간 운영회의에서 성과 확인과 서비스 개선을 위해 대시보드 기준을 다시 잡아달라고 요청했다. 제공된 자료를 바탕으로 무엇을 주 KPI로 볼지 판단해야 한다.",
+      "goal": "고객 행동 지표와 주문 추이, 이벤트 수집 점검 로그를 함께 보고 이번 대시보드의 핵심 KPI와 보조 지표를 제안한다.",
+      "constraints": [
+        "제공된 자료만 사용한다.",
+        "실제 기업명, 제품명, 인명은 쓰지 않는다.",
+        "주 KPI는 1개로 제안하되 보조 지표도 함께 적는다.",
+        "데이터 수집 문제와 실제 서비스 문제를 구분해 해석한다."
+      ]
+    },
+    "materials": [
+      {
+        "material_id": "mat_01",
+        "type": "table",
+        "subtype": "kpi_comparison_table",
+        "title": "주간 KPI 후보 비교표",
+        "description": "방문수, 재방문율, 전환율, 주문수를 비교해 이번 대시보드의 주 지표를 고를 수 있게 정리한 표이다. 우선순위 열은 참고용이다.",
+        "factual_status": "synthetic_mission_material",
+        "used_for": "주 KPI 후보를 비교하고 우선순위를 고른다.",
+        "evidence_source": [
+          "정보 처리",
+          "정보, 자료 분석",
+          "의사 결정, 문제점 해결",
+          "정보의 의미 해석"
+        ],
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "decision_goal",
+          "main_issue"
+        ],
+        "data": {
+          "chart_type": "bar",
+          "x_axis": {
+            "label": "비교 항목",
+            "values": [
+              "방문수",
+              "재방문율",
+              "전환율",
+              "주문수"
+            ]
+          },
+          "y_axis": {
+            "label": "상대적 적합성",
+            "unit": "점"
+          },
+          "series": [
+            {
+              "name": "적합성 참고값",
+              "values": [
+                3,
+                4,
+                5,
+                4
+              ]
+            }
+          ],
+          "columns": [
+            {
+              "key": "option",
+              "label": "지표 후보"
+            },
+            {
+              "key": "strength",
+              "label": "강점"
+            },
+            {
+              "key": "weakness",
+              "label": "약점"
+            },
+            {
+              "key": "priority",
+              "label": "우선순위(참고)"
+            }
+          ],
+          "rows": [
+            {
+              "option": "방문수",
+              "strength": "유입 규모를 빠르게 볼 수 있다.",
+              "weakness": "전환 문제를 직접 보여주지 못한다.",
+              "priority": 3
+            },
+            {
+              "option": "재방문율",
+              "strength": "고객 충성도 변화를 볼 수 있다.",
+              "weakness": "주문 증가와의 연결이 약하다.",
+              "priority": 2
+            },
+            {
+              "option": "전환율",
+              "strength": "유입 대비 성과를 가장 직접적으로 보여준다.",
+              "weakness": "절대 주문 규모는 따로 봐야 한다.",
+              "priority": 1
+            },
+            {
+              "option": "주문수",
+              "strength": "매출 흐름과 가장 가깝다.",
+              "weakness": "유입과 전환 원인을 분리하기 어렵다.",
+              "priority": 2
+            }
+          ],
+          "author": "분석지원팀",
+          "items": [],
+          "thread": [],
+          "entries": [],
+          "cards": []
+        },
+        "confidence": {
+          "score": 0.94,
+          "checks": {
+            "synthetic_material": true
+          },
+          "warnings": []
+        }
+      },
+      {
+        "material_id": "mat_02",
+        "type": "chart",
+        "subtype": "weekly_trend_line",
+        "title": "주간 방문수와 주문수 추이",
+        "description": "최근 5주 동안 방문은 늘었지만 주문은 거의 제자리인 흐름을 보여주는 차트이다.",
+        "factual_status": "synthetic_mission_material",
+        "used_for": "유입 대비 주문 정체 여부를 확인한다.",
+        "evidence_source": [
+          "정보 수집",
+          "정보 처리",
+          "정보, 자료 분석",
+          "논리적 분석"
+        ],
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "period",
+          "trend_pattern",
+          "main_issue"
+        ],
+        "data": {
+          "chart_type": "line",
+          "x_axis": {
+            "label": "주차",
+            "values": [
+              "1주차",
+              "2주차",
+              "3주차",
+              "4주차",
+              "5주차"
+            ]
+          },
+          "y_axis": {
+            "label": "건수",
+            "unit": "건"
+          },
+          "series": [
+            {
+              "name": "방문수",
+              "values": [
+                820,
+                860,
+                910,
+                930,
+                980
+              ]
+            },
+            {
+              "name": "주문수",
+              "values": [
+                102,
+                101,
+                104,
+                103,
+                105
+              ]
+            }
+          ],
+          "columns": [
+            {
+              "key": "option",
+              "label": "항목"
+            },
+            {
+              "key": "strength",
+              "label": "강점"
+            },
+            {
+              "key": "weakness",
+              "label": "약점"
+            },
+            {
+              "key": "priority",
+              "label": "우선순위"
+            }
+          ],
+          "rows": [],
+          "author": "분석지원팀",
+          "items": [],
+          "thread": [],
+          "entries": [],
+          "cards": []
+        },
+        "confidence": {
+          "score": 0.96,
+          "checks": {
+            "synthetic_material": true
+          },
+          "warnings": []
+        }
+      },
+      {
+        "material_id": "mat_03",
+        "type": "log",
+        "subtype": "event_quality_log",
+        "title": "이벤트 수집 점검 로그",
+        "description": "주문 이벤트가 실제로 누락됐는지, 아니면 서비스 지표가 정체된 것인지 확인하는 점검 기록이다.",
+        "factual_status": "synthetic_mission_material",
+        "used_for": "지표 하락이 데이터 수집 문제인지 서비스 문제인지 가늠한다.",
+        "evidence_source": [
+          "정보 수집",
+          "절차, 자료, 주변환경 관찰",
+          "정보 처리",
+          "사물, 행동, 사건 파악"
+        ],
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "trend_pattern",
+          "main_issue"
+        ],
+        "data": {
+          "chart_type": "bar",
+          "x_axis": {
+            "label": "점검 항목",
+            "values": [
+              "앱 주문",
+              "웹 주문",
+              "결제완료",
+              "재시도",
+              "집계지연"
+            ]
+          },
+          "y_axis": {
+            "label": "상태 점검",
+            "unit": "건"
+          },
+          "series": [
+            {
+              "name": "점검 결과",
+              "values": [
+                0,
+                0,
+                1,
+                0,
+                1
+              ]
+            }
+          ],
+          "columns": [
+            {
+              "key": "option",
+              "label": "점검 항목"
+            },
+            {
+              "key": "strength",
+              "label": "확인 포인트"
+            },
+            {
+              "key": "weakness",
+              "label": "한계"
+            },
+            {
+              "key": "priority",
+              "label": "중요도"
+            }
+          ],
+          "rows": [],
+          "author": "데이터운영팀",
+          "items": [
+            {
+              "text": "앱 주문 이벤트 집계 지연 여부를 확인했다.",
+              "period": "5주차",
+              "task": "점검",
+              "constraint": "누락 건수는 거의 없었다.",
+              "label": "앱 주문",
+              "status": "checked",
+              "importance": "높음"
+            },
+            {
+              "text": "웹 주문 이벤트 집계 상태를 확인했다.",
+              "period": "5주차",
+              "task": "점검",
+              "constraint": "지연이 관측되지 않았다.",
+              "label": "웹 주문",
+              "status": "checked",
+              "importance": "높음"
+            },
+            {
+              "text": "결제완료 이벤트 샘플을 검증했다.",
+              "period": "5주차",
+              "task": "검증",
+              "constraint": "소수 지연만 확인되었다.",
+              "label": "결제완료",
+              "status": "issue",
+              "importance": "중간"
+            },
+            {
+              "text": "일별 집계 마감 결과를 확인했다.",
+              "period": "5주차",
+              "task": "정리",
+              "constraint": "주문 정체를 설명할 수준의 수집 오류는 아니었다.",
+              "label": "집계",
+              "status": "checked",
+              "importance": "높음"
+            }
+          ],
+          "thread": [],
+          "entries": [
+            {
+              "time": "09:10",
+              "actor": "데이터운영팀",
+              "event": "앱 주문 이벤트 집계 확인",
+              "note": "전일 누락 건수는 확인되지 않았다."
+            },
+            {
+              "time": "10:30",
+              "actor": "데이터운영팀",
+              "event": "웹 주문 이벤트 집계 확인",
+              "note": "지연 발생이 없었다."
+            },
+            {
+              "time": "13:20",
+              "actor": "QA",
+              "event": "결제완료 이벤트 샘플 검증",
+              "note": "샘플 일부에서 짧은 지연이 있었다."
+            },
+            {
+              "time": "15:00",
+              "actor": "운영",
+              "event": "재시도 로그 확인",
+              "note": "동일 사용자 중복 집계는 없었다."
+            },
+            {
+              "time": "17:40",
+              "actor": "분석",
+              "event": "일별 집계 마감",
+              "note": "주문 정체는 수집 오류보다 실제 흐름과 더 가깝다."
+            }
+          ],
+          "cards": []
+        },
+        "confidence": {
+          "score": 0.91,
+          "checks": {
+            "synthetic_material": true
+          },
+          "warnings": []
+        }
+      }
+    ],
+    "tasks": [
+      {
+        "task_id": "task_01",
+        "instruction": "고객 행동 데이터와 주문 추이 차트를 함께 보고, 이번 대시보드에서 가장 먼저 봐야 할 핵심 변화 1가지를 고르세요. 선택 이유도 간단히 적으세요.",
+        "required_materials": [
+          "mat_01",
+          "mat_02"
+        ],
+        "expected_action": "observe"
+      },
+      {
+        "task_id": "task_02",
+        "instruction": "이벤트 수집 점검 로그를 확인해, 1번에서 고른 변화가 실제 서비스 문제인지 데이터 수집 문제인지 진단하세요. 근거는 두 자료를 함께 연결해서 쓰세요.",
+        "required_materials": [
+          "mat_02",
+          "mat_03"
+        ],
+        "expected_action": "diagnose"
+      },
+      {
+        "task_id": "task_03",
+        "instruction": "세 자료를 바탕으로 주 KPI 1개와 보조 지표 2개를 제안하고, 어떤 순서로 모니터링할지 적으세요.",
+        "required_materials": [
+          "mat_01",
+          "mat_02",
+          "mat_03"
+        ],
+        "expected_action": "recommend"
+      }
+    ],
+    "submission_format": {
+      "type": "짧은 분석 보고서",
+      "estimated_time_minutes": 15,
+      "required_sections": [
+        "핵심 변화 요약",
+        "원인 진단",
+        "KPI 및 대시보드 제안"
+      ],
+      "length_hint": "400~700자"
+    }
+  },
+  "evaluation": {
+    "expected_insights": [
+      "방문수 증가와 주문수 정체의 괴리를 핵심 문제로 파악한다.",
+      "점검 로그를 근거로 수집 오류보다 실제 전환 문제에 가깝다고 해석한다.",
+      "주 KPI는 주문수 단독보다 전환율 중심으로 두고 보조 지표를 함께 제안한다."
+    ],
+    "rubric": [
+      {
+        "criterion": "핵심 변화 식별",
+        "description": "주간 방문 증가와 주문 정체의 차이를 정확히 짚고, 어떤 변화가 먼저 봐야 할 문제인지 분명하게 제시했는지 본다.",
+        "points": 30,
+        "linked_evidence": [
+          "정보 수집",
+          "정보 처리",
+          "정보, 자료 분석"
+        ]
+      },
+      {
+        "criterion": "자료 연결 진단",
+        "description": "주문 추이 차트와 이벤트 수집 점검 로그를 함께 연결해 실제 서비스 문제인지 데이터 수집 문제인지 진단했는지 본다.",
+        "points": 35,
+        "linked_evidence": [
+          "논리적 분석",
+          "추리력",
+          "사물, 행동, 사건 파악"
+        ]
+      },
+      {
+        "criterion": "KPI 제안의 실행성",
+        "description": "주 KPI 1개와 보조 지표 2개가 의사결정에 바로 쓸 수 있게 정리되었는지 본다.",
+        "points": 35,
+        "linked_evidence": [
+          "의사 결정, 문제점 해결",
+          "목표, 전략 수립",
+          "정보의 의미 해석"
+        ]
+      }
+    ]
+  },
+  "reliability": {
+    "score": 1.0,
+    "raw_score": 100,
+    "passed": true,
+    "calculated_by": "validator.v1",
+    "human_review_required": true,
+    "warning_count": 0,
+    "fail_count": 0,
+    "repair_count": 0,
+    "score_breakdown": {
+      "schema": {
+        "max": 20,
+        "earned": 20
+      },
+      "system_decisions": {
+        "max": 15,
+        "earned": 15
+      },
+      "materials": {
+        "max": 20,
+        "earned": 20
+      },
+      "mission_facts": {
+        "max": 15,
+        "earned": 15
+      },
+      "evidence": {
+        "max": 20,
+        "earned": 20
+      },
+      "evaluation": {
+        "max": 10,
+        "earned": 10
+      }
+    }
+  },
+  "evidence_chain": {
+    "created_by": "validator.v1",
+    "source_exec_job": {
+      "exec_job_id": "exec_003",
+      "text": "대용량의 데이터를 처리하는 플랫폼을 활용하여 처리·분석한다.",
+      "source_ref": {
+        "file": "K000001080/dtlGb_2.xml",
+        "field": "jobsDo.execJob",
+        "index": 3
+      },
+      "selection_reason": "Pilot config selected exec_003."
+    },
+    "linked_evidence": {
+      "activities": [
+        {
+          "name": "정보 수집",
+          "score": 97,
+          "description": "모든 관련 자료에서 정보를 수집, 관찰하기 중요도",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 1
+          }
+        },
+        {
+          "name": "정보 처리",
+          "score": 95,
+          "description": "정보 또는 자료를 수집, 분류, 계산, 검증하거나 표로 만들기 활동 중요도",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 2
+          }
+        },
+        {
+          "name": "사물, 행동, 사건 파악",
+          "score": 95,
+          "description": "차이점과 유사점을 분류하고 어떤 상황에서 변화를 알아차림으로써 정보를 파악하기 활동 중요도",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 3
+          }
+        },
+        {
+          "name": "컴퓨터 업무",
+          "score": 95,
+          "description": "프로그램 제작, 소프트웨어 저작, 기능 설정, 정보 입력, 정보 처리를 하기 위한 컴퓨터 시스템 사용하기 활동 중요도",
+          "rank": 4,
+          "source_ref": {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 4
+          }
+        },
+        {
+          "name": "의사 결정, 문제점 해결",
+          "score": 93,
+          "description": "가장 좋은 해결책을 선택하기 위해 정보를 분석하고 문제점을 해결하기 위해 결과를 평가하기 활동 중요도",
+          "rank": 5,
+          "source_ref": {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 5
+          }
+        }
+      ],
+      "abilities": [
+        {
+          "name": "수리력",
+          "score": 96,
+          "description": "어떤 문제를 해결하기 위해 수학을 사용한다",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 1
+          }
+        },
+        {
+          "name": "전산",
+          "score": 95,
+          "description": "다양한 목적을 위해 소프트웨어나 인터넷을 활용하거나 프로그램을 작성한다",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 2
+          }
+        },
+        {
+          "name": "논리적 분석",
+          "score": 92,
+          "description": "문제를 해결하기 위해(혹은 의사결정을 하기 위해) 체계적으로 이치에 맞는 생각을 해낸다",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 3
+          }
+        }
+      ],
+      "knowledge": [
+        {
+          "name": "산수와 수학",
+          "score": 93,
+          "description": "연산, 대수학, 통계, 기하학의 계산 및 응용에 관한 지식",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 1
+          }
+        },
+        {
+          "name": "컴퓨터와 전자공학",
+          "score": 87,
+          "description": "컴퓨터의 하드웨어, 회로판, 처리장치, 반도체, 전자장비에 관한 지식",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 2
+          }
+        },
+        {
+          "name": "영어",
+          "score": 75,
+          "description": "영어를 읽고, 쓰고, 듣고 말하는데 필요한 지식",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 3
+          }
+        }
+      ],
+      "work_environment": [
+        {
+          "name": "재택근무",
+          "score": 98,
+          "description": "재택근무 가능성",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobsEnv",
+            "index": 1
+          }
+        },
+        {
+          "name": "앉아서 근무",
+          "score": 91,
+          "description": "앉아서 근무하는 빈도",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobsEnv",
+            "index": 2
+          }
+        },
+        {
+          "name": "연설, 발표, 회의하기",
+          "score": 84,
+          "description": "사람들 앞에서 공식적으로 연설(발표,회의 등의 상황)",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobsEnv",
+            "index": 3
+          }
+        }
+      ]
+    },
+    "material_evidence_map": [
+      {
+        "material_id": "mat_01",
+        "supported_by": [
+          "정보 처리",
+          "정보, 자료 분석",
+          "의사 결정, 문제점 해결",
+          "정보의 의미 해석"
+        ]
+      },
+      {
+        "material_id": "mat_02",
+        "supported_by": [
+          "정보 수집",
+          "정보 처리",
+          "정보, 자료 분석",
+          "논리적 분석"
+        ]
+      },
+      {
+        "material_id": "mat_03",
+        "supported_by": [
+          "정보 수집",
+          "절차, 자료, 주변환경 관찰",
+          "정보 처리",
+          "사물, 행동, 사건 파악"
+        ]
+      }
+    ],
+    "items": [
+      {
+        "target_type": "material",
+        "target_id": "mat_01",
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "decision_goal",
+          "main_issue"
+        ],
+        "source_refs": [
+          {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 2,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 6,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 5,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 9,
+            "source_root": "data/api_raw"
+          }
+        ],
+        "connection_reason": "직업 profile evidence와 생성 자료가 간접 연결됨",
+        "traceability": "indirect"
+      },
+      {
+        "target_type": "material",
+        "target_id": "mat_02",
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "period",
+          "trend_pattern",
+          "main_issue"
+        ],
+        "source_refs": [
+          {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 1,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 2,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 6,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001080/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 3,
+            "source_root": "data/api_raw"
+          }
+        ],
+        "connection_reason": "직업 profile evidence와 생성 자료가 간접 연결됨",
+        "traceability": "indirect"
+      },
+      {
+        "target_type": "material",
+        "target_id": "mat_03",
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "trend_pattern",
+          "main_issue"
+        ],
+        "source_refs": [
+          {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 1,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 7,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 2,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001080/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 3,
+            "source_root": "data/api_raw"
+          }
+        ],
+        "connection_reason": "직업 profile evidence와 생성 자료가 간접 연결됨",
+        "traceability": "indirect"
+      }
+    ]
+  },
+  "axis_signals_derived": {
+    "AX1": 0.5333,
+    "AX2": 0.1167,
+    "AX3": 0.35,
+    "AX4": 0.0,
+    "AX5": 0.0
+  }
+}

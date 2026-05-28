@@ -1,0 +1,808 @@
+{
+  "schema_version": "mission_output.v1",
+  "mission_id": "mission_K000000997_normal_001_b144211",
+  "job_identity": {
+    "job_cd": "K000000997",
+    "job_lrcl_nm": "경영·사무·금융·보험직",
+    "job_mdcl_nm": "광고·조사·상품기획·행사기획 전문가",
+    "job_smcl_nm": "상품기획자",
+    "source_ref": {
+      "file": "K000000997/dtlGb_2.xml",
+      "field": "jobsDo",
+      "index": null
+    }
+  },
+  "target_exec_job": {
+    "exec_job_id": "exec_004",
+    "text": "특정상품 및 서비스에 관한 현재의 판매수준, 소비자의 평가 등에 관한 정보를 체계적으로 수집·분석한다.",
+    "source_ref": {
+      "file": "K000000997/dtlGb_2.xml",
+      "field": "jobsDo.execJob",
+      "index": 4
+    },
+    "selection_reason": "Pilot config selected exec_004."
+  },
+  "mission_facts": {
+    "org_name": "세모리빙 상품기획팀",
+    "domain": "생활용품 온라인 판매",
+    "period": [
+      "1주차",
+      "2주차",
+      "3주차",
+      "4주차",
+      "5주차"
+    ],
+    "trend_pattern": "정리박스 판매량이 4주차까지 하락하다가 5주차에 소폭 반등했다.",
+    "main_issue": "판매 흐름이 약해진 가운데 고객 불만이 반복되어, 다음 개선안을 무엇부터 처리할지 정해야 한다.",
+    "feedback_themes": [
+      "뚜껑이 헐거워 내구성에 대한 불안이 있다",
+      "설명과 사용 방법 안내가 부족하다",
+      "색상 선택 폭이 좁다",
+      "가격 대비 수납공간은 괜찮다는 반응이 있다"
+    ],
+    "decision_goal": "판매 회복에 가장 영향을 줄 개선안을 1순위로 정하고, 다음 실행 순서를 함께 제안한다."
+  },
+  "mission": {
+    "title": "판매 흐름과 고객 반응을 바탕으로 개선 우선순위 정하기",
+    "task_type": "research_and_analysis",
+    "secondary_task_types": [
+      "decision_making"
+    ],
+    "difficulty": {
+      "level": "normal",
+      "label": "보통",
+      "estimated_time_minutes": 15,
+      "material_bundle_style": "light_work_material_bundle",
+      "material_count_range": [
+        2,
+        3
+      ],
+      "task_count_range": [
+        2,
+        3
+      ],
+      "answer_length_hint": "400~700자",
+      "requires_cross_material_reasoning": true,
+      "requires_tradeoff_judgment": false,
+      "requires_domain_expertise": false
+    },
+    "scenario": {
+      "role": "세모리빙 상품기획팀의 상품기획자",
+      "context": "당신은 생활용품 신제품인 접이식 정리박스의 최근 판매 흐름과 고객 후기를 함께 검토하고 있다. 팀에서는 다음 분기 개선안을 3개까지 검토했지만, 무엇을 먼저 실행해야 할지 의견이 갈린다.",
+      "goal": "제공된 자료만 근거로 판매 흐름의 변화와 고객 반응을 정리한 뒤, 가장 먼저 실행할 개선안을 1순위로 제안한다.",
+      "constraints": [
+        "실제 회사명, 실제 인명, 외부 검색은 사용하지 않는다.",
+        "반드시 제공된 차트, 메모, 표만 근거로 판단한다.",
+        "답변에는 판매 흐름 진단, 고객 반응 요약, 우선순위 제안을 모두 포함한다."
+      ]
+    },
+    "materials": [
+      {
+        "material_id": "mat_sales_chart",
+        "type": "chart",
+        "subtype": "주간 판매추이",
+        "title": "정리박스 5주 판매 흐름",
+        "description": "접이식 정리박스의 최근 5주 판매량 변화를 보여 주는 차트",
+        "factual_status": "synthetic_mission_material",
+        "used_for": "판매 흐름의 하락 시점과 반등 여부를 확인한다.",
+        "evidence_source": [
+          "정보 수집",
+          "사물, 행동, 사건 파악",
+          "업무 계획, 우선순위 결정"
+        ],
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "period",
+          "trend_pattern",
+          "main_issue",
+          "decision_goal"
+        ],
+        "data": {
+          "chart_type": "line",
+          "x_axis": {
+            "label": "주차",
+            "values": [
+              "1주차",
+              "2주차",
+              "3주차",
+              "4주차",
+              "5주차"
+            ]
+          },
+          "y_axis": {
+            "label": "판매량",
+            "unit": "개"
+          },
+          "series": [
+            {
+              "name": "정리박스 판매량",
+              "values": [
+                120,
+                110,
+                98,
+                92,
+                99
+              ]
+            }
+          ],
+          "columns": [
+            {
+              "key": "option",
+              "label": "항목"
+            },
+            {
+              "key": "strength",
+              "label": "수치"
+            },
+            {
+              "key": "weakness",
+              "label": "해석"
+            },
+            {
+              "key": "priority",
+              "label": "판단"
+            }
+          ],
+          "rows": [],
+          "author": "세모리빙 상품기획팀",
+          "items": [],
+          "thread": [],
+          "entries": [],
+          "cards": []
+        },
+        "confidence": {
+          "score": 0.93,
+          "checks": {
+            "synthetic_material": true
+          },
+          "warnings": []
+        }
+      },
+      {
+        "material_id": "mat_feedback_memo",
+        "type": "memo",
+        "subtype": "고객후기 요약",
+        "title": "최근 고객 후기 4가지 핵심 내용",
+        "description": "정리박스 후기에서 반복 언급된 장단점을 요약한 메모",
+        "factual_status": "synthetic_mission_material",
+        "used_for": "반복 불만과 강점을 구분한다.",
+        "evidence_source": [
+          "사물, 서비스, 사람의 질 판단",
+          "정보 수집",
+          "영업과 마케팅"
+        ],
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "feedback_themes",
+          "main_issue"
+        ],
+        "data": {
+          "chart_type": "bar",
+          "x_axis": {
+            "label": "후기 항목",
+            "values": [
+              "내구성",
+              "사용 편의",
+              "가격 만족",
+              "색상 선택"
+            ]
+          },
+          "y_axis": {
+            "label": "언급 수",
+            "unit": "건"
+          },
+          "series": [
+            {
+              "name": "후기 언급",
+              "values": [
+                17,
+                11,
+                9,
+                6
+              ]
+            }
+          ],
+          "columns": [
+            {
+              "key": "option",
+              "label": "항목"
+            },
+            {
+              "key": "strength",
+              "label": "내용"
+            },
+            {
+              "key": "weakness",
+              "label": "문제"
+            },
+            {
+              "key": "priority",
+              "label": "중요도"
+            }
+          ],
+          "rows": [],
+          "author": "세모리빙 고객경험팀",
+          "items": [
+            {
+              "text": "뚜껑이 헐거워서 가방 안에서 열릴까 걱정된다는 반응이 반복되었다.",
+              "period": "최근 2주",
+              "task": "불만 분류",
+              "constraint": "반복 언급 중심",
+              "label": "내구성",
+              "status": "issue",
+              "importance": "높음"
+            },
+            {
+              "text": "조립은 어렵지 않지만 설명이 더 자세하면 좋겠다는 의견이 있었다.",
+              "period": "최근 2주",
+              "task": "불편 분류",
+              "constraint": "안내 보강 필요",
+              "label": "사용성",
+              "status": "issue",
+              "importance": "중간"
+            },
+            {
+              "text": "가격 대비 수납공간은 만족스럽다는 의견이 있었다.",
+              "period": "최근 2주",
+              "task": "강점 확인",
+              "constraint": "긍정 반응",
+              "label": "가성비",
+              "status": "checked",
+              "importance": "중간"
+            },
+            {
+              "text": "색상 종류가 적어서 선택이 아쉽다는 의견이 있었다.",
+              "period": "최근 2주",
+              "task": "개선 요구 파악",
+              "constraint": "선택폭 확대",
+              "label": "디자인",
+              "status": "issue",
+              "importance": "낮음"
+            }
+          ],
+          "thread": [],
+          "entries": [],
+          "cards": []
+        },
+        "confidence": {
+          "score": 0.91,
+          "checks": {
+            "synthetic_material": true
+          },
+          "warnings": []
+        }
+      },
+      {
+        "material_id": "mat_option_table",
+        "type": "table",
+        "subtype": "개선안 비교",
+        "title": "개선안 후보 비교표",
+        "description": "판매 회복을 위해 검토 중인 개선안 3개를 장단점과 현재 우선도 기준으로 정리한 표",
+        "factual_status": "synthetic_mission_material",
+        "used_for": "후보안의 우선순위를 다시 정한다.",
+        "evidence_source": [
+          "의사 결정, 문제점 해결",
+          "업무 계획, 우선순위 결정",
+          "경제와 회계"
+        ],
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "main_issue",
+          "feedback_themes",
+          "decision_goal"
+        ],
+        "data": {
+          "chart_type": "pie",
+          "x_axis": {
+            "label": "개선안",
+            "values": [
+              "A안",
+              "B안",
+              "C안"
+            ]
+          },
+          "y_axis": {
+            "label": "현재 우선도",
+            "unit": "순위"
+          },
+          "series": [
+            {
+              "name": "내부 검토",
+              "values": [
+                2,
+                1,
+                3
+              ]
+            }
+          ],
+          "columns": [
+            {
+              "key": "option",
+              "label": "개선안"
+            },
+            {
+              "key": "strength",
+              "label": "강점"
+            },
+            {
+              "key": "weakness",
+              "label": "약점"
+            },
+            {
+              "key": "priority",
+              "label": "초안 순위"
+            }
+          ],
+          "rows": [
+            {
+              "option": "A. 뚜껑 구조 보강",
+              "strength": "반복 불만의 핵심 원인을 직접 해결한다.",
+              "weakness": "부품 변경으로 원가와 검수 부담이 늘 수 있다.",
+              "priority": 2
+            },
+            {
+              "option": "B. 상세페이지 사용법 보강",
+              "strength": "즉시 적용 가능하고 비용이 적다.",
+              "weakness": "제품 자체의 불만은 남을 수 있다.",
+              "priority": 1
+            },
+            {
+              "option": "C. 색상 2종 추가",
+              "strength": "선택 폭을 넓혀 일부 고객층을 끌 수 있다.",
+              "weakness": "핵심 불만 해결 효과가 작다.",
+              "priority": 3
+            }
+          ],
+          "author": "세모리빙 상품기획팀",
+          "items": [],
+          "thread": [],
+          "entries": [],
+          "cards": []
+        },
+        "confidence": {
+          "score": 0.88,
+          "checks": {
+            "synthetic_material": true
+          },
+          "warnings": []
+        }
+      }
+    ],
+    "tasks": [
+      {
+        "task_id": "task_1",
+        "instruction": "판매 흐름 차트와 고객 후기 메모를 함께 보고, 최근 판매 흐름의 변화와 반복되는 고객 반응을 각각 1문장씩 정리하라.",
+        "required_materials": [
+          "mat_sales_chart",
+          "mat_feedback_memo"
+        ],
+        "expected_action": "핵심 변화와 반복 불만을 요약한다."
+      },
+      {
+        "task_id": "task_2",
+        "instruction": "개선안 비교표를 참고해, A안·B안·C안 중 무엇을 1순위로 올릴지 선택하고 그 이유를 비교해서 설명하라.",
+        "required_materials": [
+          "mat_feedback_memo",
+          "mat_option_table"
+        ],
+        "expected_action": "개선안 우선순위를 판단한다."
+      },
+      {
+        "task_id": "task_3",
+        "instruction": "다음 주 실행안으로 가장 먼저 할 1개와 보류할 1개를 함께 제안하고, 실행 순서가 그렇게 되어야 하는 이유를 적어라.",
+        "required_materials": [
+          "mat_sales_chart",
+          "mat_feedback_memo",
+          "mat_option_table"
+        ],
+        "expected_action": "실행 순서를 제안한다."
+      }
+    ],
+    "submission_format": {
+      "type": "서술형 요약",
+      "estimated_time_minutes": 15,
+      "required_sections": [
+        "판매 흐름 진단",
+        "고객 반응 요약",
+        "개선 우선순위 제안"
+      ],
+      "length_hint": "400~700자"
+    }
+  },
+  "evaluation": {
+    "expected_insights": [
+      "판매량은 4주차까지 하락했고 5주차에만 소폭 반등했다.",
+      "고객 반응의 핵심 문제는 뚜껑 헐거움과 사용 안내 부족이다.",
+      "가장 먼저 처리할 개선안은 핵심 불만을 직접 줄이는 방향이어야 한다.",
+      "색상 추가는 보조안으로 두고, 우선순위가 낮다."
+    ],
+    "rubric": [
+      {
+        "criterion": "판매 흐름 진단",
+        "description": "차트에서 보이는 하락과 반등의 흐름을 정확히 읽고 요약했는지 평가한다.",
+        "points": 30,
+        "linked_evidence": [
+          "정보 수집",
+          "사물, 행동, 사건 파악"
+        ]
+      },
+      {
+        "criterion": "고객 반응 해석",
+        "description": "메모에 있는 반복 불만과 강점을 구분해 핵심 이슈를 잡아냈는지 평가한다.",
+        "points": 25,
+        "linked_evidence": [
+          "사물, 서비스, 사람의 질 판단",
+          "정보 수집"
+        ]
+      },
+      {
+        "criterion": "개선안 우선순위 판단",
+        "description": "표의 후보안을 비교해 왜 그 순서로 실행해야 하는지 설명했는지 평가한다.",
+        "points": 25,
+        "linked_evidence": [
+          "의사 결정, 문제점 해결",
+          "업무 계획, 우선순위 결정"
+        ]
+      },
+      {
+        "criterion": "실행 제안의 구체성",
+        "description": "최종 추천안과 보류안을 함께 제시하며 실행 순서가 현실적인지 평가한다.",
+        "points": 20,
+        "linked_evidence": [
+          "목표, 전략 수립",
+          "경영 및 행정"
+        ]
+      }
+    ]
+  },
+  "reliability": {
+    "score": 1.0,
+    "raw_score": 100,
+    "passed": true,
+    "calculated_by": "validator.v1",
+    "human_review_required": true,
+    "warning_count": 0,
+    "fail_count": 0,
+    "repair_count": 0,
+    "score_breakdown": {
+      "schema": {
+        "max": 20,
+        "earned": 20
+      },
+      "system_decisions": {
+        "max": 15,
+        "earned": 15
+      },
+      "materials": {
+        "max": 20,
+        "earned": 20
+      },
+      "mission_facts": {
+        "max": 15,
+        "earned": 15
+      },
+      "evidence": {
+        "max": 20,
+        "earned": 20
+      },
+      "evaluation": {
+        "max": 10,
+        "earned": 10
+      }
+    }
+  },
+  "evidence_chain": {
+    "created_by": "validator.v1",
+    "source_exec_job": {
+      "exec_job_id": "exec_004",
+      "text": "특정상품 및 서비스에 관한 현재의 판매수준, 소비자의 평가 등에 관한 정보를 체계적으로 수집·분석한다.",
+      "source_ref": {
+        "file": "K000000997/dtlGb_2.xml",
+        "field": "jobsDo.execJob",
+        "index": 4
+      },
+      "selection_reason": "Pilot config selected exec_004."
+    },
+    "linked_evidence": {
+      "activities": [
+        {
+          "name": "업무, 활동에 대한 일정관리",
+          "score": 98,
+          "description": "이벤트, 프로그램, 활동에 대한 일정을 관리하기 활동 중요도",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 1
+          }
+        },
+        {
+          "name": "사물, 행동, 사건 파악",
+          "score": 97,
+          "description": "차이점과 유사점을 분류하고 어떤 상황에서 변화를 알아차림으로써 정보를 파악하기 활동 중요도",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 2
+          }
+        },
+        {
+          "name": "목표, 전략 수립",
+          "score": 95,
+          "description": "장기 목표를 세우고 그 목표를 달성하기 위한 전략과 실행할 목록을 명시하기 활동 중요도",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 3
+          }
+        },
+        {
+          "name": "의사 결정, 문제점 해결",
+          "score": 95,
+          "description": "가장 좋은 해결책을 선택하기 위해 정보를 분석하고 문제점을 해결하기 위해 결과를 평가하기 활동 중요도",
+          "rank": 4,
+          "source_ref": {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 4
+          }
+        },
+        {
+          "name": "창조적 생각",
+          "score": 95,
+          "description": "새로운 소프트웨어, 생각, 시스템, 제품 등을 설계하고 개발하기 활동 중요도",
+          "rank": 5,
+          "source_ref": {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 5
+          }
+        }
+      ],
+      "abilities": [
+        {
+          "name": "창의력",
+          "score": 91,
+          "description": "주어진 주제나 상황에 대하여 독특하고 기발한 아이디어를 산출한다",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 1
+          }
+        },
+        {
+          "name": "협상",
+          "score": 75,
+          "description": "사람들과의 의견차이를 좁혀 합의점을 찾는다",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 2
+          }
+        },
+        {
+          "name": "말하기",
+          "score": 73,
+          "description": "자기가 알고 있는 것을 다른 사람에게 조리있게 말한다",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 3
+          }
+        }
+      ],
+      "knowledge": [
+        {
+          "name": "영업과 마케팅",
+          "score": 91,
+          "description": "상품이나 서비스를 판매하거나 촉진을 하는 것에 관한 지식(마케팅 전략, 상품의 전시와 판매기법, 영업관리 등)",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 1
+          }
+        },
+        {
+          "name": "상품 제조 및 공정",
+          "score": 86,
+          "description": "상품의 제조 및 유통을 효율적으로 하기 위해 필요한 원자재, 제조공정, 품질관리, 비용에 관한 지식",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 2
+          }
+        },
+        {
+          "name": "디자인",
+          "score": 84,
+          "description": "밑그림, 제도와 같이 디자인에 필요한 기법 및 도구에 관한 지식",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 3
+          }
+        }
+      ],
+      "work_environment": [
+        {
+          "name": "재택근무",
+          "score": 92,
+          "description": "재택근무 가능성",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobsEnv",
+            "index": 1
+          }
+        },
+        {
+          "name": "다른 사람들을 조율하거나 이끌기",
+          "score": 91,
+          "description": "업무 특성상 다른 사람들을 조율하거나 이끄는 것의 중요성",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobsEnv",
+            "index": 2
+          }
+        },
+        {
+          "name": "이메일 이용하기",
+          "score": 90,
+          "description": "업무 수행하면서 이메일 사용하는 정도",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobsEnv",
+            "index": 3
+          }
+        }
+      ]
+    },
+    "material_evidence_map": [
+      {
+        "material_id": "mat_sales_chart",
+        "supported_by": [
+          "정보 수집",
+          "사물, 행동, 사건 파악",
+          "업무 계획, 우선순위 결정"
+        ]
+      },
+      {
+        "material_id": "mat_feedback_memo",
+        "supported_by": [
+          "사물, 서비스, 사람의 질 판단",
+          "정보 수집",
+          "영업과 마케팅"
+        ]
+      },
+      {
+        "material_id": "mat_option_table",
+        "supported_by": [
+          "의사 결정, 문제점 해결",
+          "업무 계획, 우선순위 결정",
+          "경제와 회계"
+        ]
+      }
+    ],
+    "items": [
+      {
+        "target_type": "material",
+        "target_id": "mat_sales_chart",
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "period",
+          "trend_pattern",
+          "main_issue",
+          "decision_goal"
+        ],
+        "source_refs": [
+          {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 6,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 2,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 10,
+            "source_root": "data/api_raw"
+          }
+        ],
+        "connection_reason": "직업 profile evidence와 생성 자료가 간접 연결됨",
+        "traceability": "indirect"
+      },
+      {
+        "target_type": "material",
+        "target_id": "mat_feedback_memo",
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "feedback_themes",
+          "main_issue"
+        ],
+        "source_refs": [
+          {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 9,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 6,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 1,
+            "source_root": "data/api_raw"
+          }
+        ],
+        "connection_reason": "직업 profile evidence와 생성 자료가 간접 연결됨",
+        "traceability": "indirect"
+      },
+      {
+        "target_type": "material",
+        "target_id": "mat_option_table",
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "main_issue",
+          "feedback_themes",
+          "decision_goal"
+        ],
+        "source_refs": [
+          {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 4,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000000997/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 10,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000000997/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 4,
+            "source_root": "data/api_raw"
+          }
+        ],
+        "connection_reason": "직업 profile evidence와 생성 자료가 간접 연결됨",
+        "traceability": "indirect"
+      }
+    ]
+  },
+  "axis_signals_derived": {
+    "AX1": 0.275,
+    "AX2": 0.275,
+    "AX3": 0.35,
+    "AX4": 0.1,
+    "AX5": 0.0
+  }
+}
