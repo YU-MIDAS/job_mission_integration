@@ -1,0 +1,827 @@
+{
+  "schema_version": "mission_output.v1",
+  "mission_id": "mission_K000001179_normal_001_b144211",
+  "job_identity": {
+    "job_cd": "K000001179",
+    "job_lrcl_nm": "경영·사무·금융·보험직",
+    "job_mdcl_nm": "금융·보험 전문가",
+    "job_smcl_nm": "투자분석가",
+    "source_ref": {
+      "file": "K000001179/dtlGb_2.xml",
+      "field": "jobsDo",
+      "index": null
+    }
+  },
+  "target_exec_job": {
+    "exec_job_id": "exec_001",
+    "text": "국내외 경제상황 및 산업·기업별 정보를 수집·분석한다.",
+    "source_ref": {
+      "file": "K000001179/dtlGb_2.xml",
+      "field": "jobsDo.execJob",
+      "index": 1
+    },
+    "selection_reason": "Pilot config selected exec_001."
+  },
+  "mission_facts": {
+    "org_name": "가온리서치센터",
+    "domain": "도심 물류용 배터리 팩 부품",
+    "period": [
+      "2026년 1월",
+      "2026년 2월",
+      "2026년 3월",
+      "2026년 4월",
+      "2026년 5월"
+    ],
+    "trend_pattern": "수주는 완만히 늘지만 재고도 함께 상승해 업황은 개선 초입이면서 부담이 남아 있는 흐름",
+    "main_issue": "업황 개선 신호와 재고 부담이 동시에 나타나는 상황에서 우선 검토 대상을 정하는 것",
+    "feedback_themes": [
+      "수주 회복",
+      "재고 부담",
+      "가격 경쟁",
+      "원가 안정"
+    ],
+    "decision_goal": "가상 후보 3곳 중 리서치 우선순위 1개와 다음 분기 투자 의견을 정한다."
+  },
+  "mission": {
+    "title": "수주·재고 흐름을 보고 우선 검토 대상을 정하기",
+    "task_type": "research_and_analysis",
+    "secondary_task_types": [],
+    "difficulty": {
+      "level": "normal",
+      "label": "보통",
+      "estimated_time_minutes": 15,
+      "material_bundle_style": "light_work_material_bundle",
+      "material_count_range": [
+        2,
+        3
+      ],
+      "task_count_range": [
+        2,
+        3
+      ],
+      "answer_length_hint": "400~700자",
+      "requires_cross_material_reasoning": true,
+      "requires_tradeoff_judgment": false,
+      "requires_domain_expertise": false
+    },
+    "scenario": {
+      "role": "가온리서치센터의 투자분석가",
+      "context": "월간 투자검토회의를 앞두고 가상의 산업인 도심 물류용 배터리 팩 부품 업황과 후보 3곳을 빠르게 정리해야 합니다.",
+      "goal": "차트, 비교표, 내부 메모를 종합해 우선 검토할 후보 1개와 보수적 또는 중립적 투자 의견을 제시합니다.",
+      "constraints": [
+        "제공된 자료만 사용한다",
+        "실제 기업명, 브랜드명, 인명을 쓰지 않는다",
+        "업황 판단과 후보 우선순위를 함께 설명한다",
+        "근거는 자료의 수치와 메모 내용에 한정한다"
+      ]
+    },
+    "materials": [
+      {
+        "material_id": "mat_01",
+        "type": "chart",
+        "subtype": "industry_trend_chart",
+        "title": "월별 수주·재고지수 추이",
+        "description": "가상의 도심 물류용 배터리 팩 부품 업황을 월별 수주지수와 재고지수로 정리한 내부 차트.",
+        "factual_status": "synthetic_mission_material",
+        "used_for": "업황이 개선 중인지, 아니면 재고 부담이 더 큰지 판단하는 근거로 사용한다.",
+        "evidence_source": [
+          "정보 수집",
+          "정보, 자료 분석",
+          "산수와 수학"
+        ],
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "period",
+          "trend_pattern",
+          "main_issue"
+        ],
+        "data": {
+          "chart_type": "line",
+          "x_axis": {
+            "label": "월",
+            "values": [
+              "1월",
+              "2월",
+              "3월",
+              "4월",
+              "5월"
+            ]
+          },
+          "y_axis": {
+            "label": "지수",
+            "unit": "기준=100"
+          },
+          "series": [
+            {
+              "name": "수주지수",
+              "values": [
+                90,
+                93,
+                97,
+                100,
+                103
+              ]
+            },
+            {
+              "name": "재고지수",
+              "values": [
+                98,
+                99,
+                101,
+                104,
+                108
+              ]
+            }
+          ],
+          "columns": [
+            {
+              "key": "option",
+              "label": "구분"
+            },
+            {
+              "key": "strength",
+              "label": "강점"
+            },
+            {
+              "key": "weakness",
+              "label": "약점"
+            },
+            {
+              "key": "priority",
+              "label": "우선순위"
+            }
+          ],
+          "rows": [],
+          "author": "가온리서치센터 내부",
+          "items": [
+            {
+              "text": "수주지수는 1월 90에서 5월 103으로 상승했다.",
+              "period": "2026년 1월~5월",
+              "task": "업황 진단",
+              "constraint": "수치 비교 중심",
+              "label": "수주 흐름",
+              "status": "checked",
+              "importance": "높음"
+            },
+            {
+              "text": "재고지수는 같은 기간 98에서 108로 상승했다.",
+              "period": "2026년 1월~5월",
+              "task": "리스크 점검",
+              "constraint": "수치 비교 중심",
+              "label": "재고 흐름",
+              "status": "checked",
+              "importance": "높음"
+            },
+            {
+              "text": "4월 이후에는 재고 증가 속도가 수주보다 더 빠르게 보인다.",
+              "period": "2026년 4월~5월",
+              "task": "업황 해석",
+              "constraint": "추세 비교",
+              "label": "추세 차이",
+              "status": "checked",
+              "importance": "중간"
+            }
+          ],
+          "thread": [],
+          "entries": [],
+          "cards": []
+        },
+        "confidence": {
+          "score": 0.95,
+          "checks": {
+            "synthetic_material": true
+          },
+          "warnings": []
+        }
+      },
+      {
+        "material_id": "mat_02",
+        "type": "table",
+        "subtype": "company_comparison_table",
+        "title": "가상 후보 3곳 비교표",
+        "description": "가상의 후보 3곳을 수익성, 성장성, 리스크, 우선순위로 비교한 내부 검토표.",
+        "factual_status": "synthetic_mission_material",
+        "used_for": "세 후보 중 우선 검토 대상을 하나 고르는 데 사용한다.",
+        "evidence_source": [
+          "경제와 회계",
+          "논리적 분석",
+          "판단과 의사결정"
+        ],
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "decision_goal",
+          "main_issue"
+        ],
+        "data": {
+          "chart_type": "bar",
+          "x_axis": {
+            "label": "후보",
+            "values": [
+              "에이모듈",
+              "비모듈",
+              "씨모듈"
+            ]
+          },
+          "y_axis": {
+            "label": "평가",
+            "unit": "점"
+          },
+          "series": [],
+          "columns": [
+            {
+              "key": "option",
+              "label": "구분"
+            },
+            {
+              "key": "strength",
+              "label": "강점"
+            },
+            {
+              "key": "weakness",
+              "label": "약점"
+            },
+            {
+              "key": "priority",
+              "label": "우선순위"
+            }
+          ],
+          "rows": [
+            {
+              "option": "에이모듈",
+              "strength": "영업이익률이 12%로 가장 높고 현금흐름이 안정적이다.",
+              "weakness": "매출 성장률이 낮아 단기 모멘텀이 약하다.",
+              "priority": 1
+            },
+            {
+              "option": "비모듈",
+              "strength": "최근 3개월 수주 증가율이 가장 높다.",
+              "weakness": "재고와 차입금이 함께 늘어 변동성이 크다.",
+              "priority": 2
+            },
+            {
+              "option": "씨모듈",
+              "strength": "원가 부담이 낮고 배당 여력이 있다.",
+              "weakness": "가동률이 낮고 실적 반등이 더디다.",
+              "priority": 3
+            }
+          ],
+          "author": "가온리서치센터 내부",
+          "items": [],
+          "thread": [],
+          "entries": [],
+          "cards": []
+        },
+        "confidence": {
+          "score": 0.94,
+          "checks": {
+            "synthetic_material": true
+          },
+          "warnings": []
+        }
+      },
+      {
+        "material_id": "mat_03",
+        "type": "memo",
+        "subtype": "internal_note",
+        "title": "채널 코멘트 메모",
+        "description": "영업과 구매 채널에서 정리한 가상 메모로, 발주와 가격, 재고, 비용에 대한 짧은 코멘트를 담았다.",
+        "factual_status": "synthetic_mission_material",
+        "used_for": "차트와 비교표의 해석을 보강하고 최종 추천의 근거를 보완한다.",
+        "evidence_source": [
+          "정보 수집",
+          "정보의 의미 해석",
+          "사람들에게 조언, 상담",
+          "의사 결정, 문제점 해결"
+        ],
+        "mission_fact_refs": [
+          "org_name",
+          "feedback_themes",
+          "main_issue",
+          "decision_goal"
+        ],
+        "data": {
+          "chart_type": "bar",
+          "x_axis": {
+            "label": "항목",
+            "values": []
+          },
+          "y_axis": {
+            "label": "상태",
+            "unit": "건"
+          },
+          "series": [],
+          "columns": [
+            {
+              "key": "option",
+              "label": "구분"
+            },
+            {
+              "key": "strength",
+              "label": "강점"
+            },
+            {
+              "key": "weakness",
+              "label": "약점"
+            },
+            {
+              "key": "priority",
+              "label": "우선순위"
+            }
+          ],
+          "rows": [],
+          "author": "가온리서치센터 리서치 메모",
+          "items": [
+            {
+              "text": "대형 고객 2곳이 2분기 발주를 소폭 늘릴 가능성이 있다는 코멘트가 있었다.",
+              "period": "2026년 5월",
+              "task": "수요 점검",
+              "constraint": "채널 코멘트 반영",
+              "label": "발주 회복",
+              "status": "checked",
+              "importance": "높음"
+            },
+            {
+              "text": "판가 인하 요구는 다소 완화됐지만 할인 문의는 아직 남아 있다.",
+              "period": "2026년 5월",
+              "task": "가격 점검",
+              "constraint": "정성 의견 정리",
+              "label": "가격 압박",
+              "status": "unchecked",
+              "importance": "중간"
+            },
+            {
+              "text": "재고 조정이 끝나지 않아 추가 물량은 보수적으로 봐야 한다.",
+              "period": "2026년 5월",
+              "task": "리스크 점검",
+              "constraint": "보수적 해석",
+              "label": "재고 부담",
+              "status": "issue",
+              "importance": "높음"
+            },
+            {
+              "text": "원자재 단가는 안정되어 수익성 방어 여지는 있다.",
+              "period": "2026년 5월",
+              "task": "비용 점검",
+              "constraint": "상승/하락 방향 확인",
+              "label": "원가 안정",
+              "status": "checked",
+              "importance": "중간"
+            }
+          ],
+          "thread": [],
+          "entries": [],
+          "cards": []
+        },
+        "confidence": {
+          "score": 0.93,
+          "checks": {
+            "synthetic_material": true
+          },
+          "warnings": []
+        }
+      }
+    ],
+    "tasks": [
+      {
+        "task_id": "task_1",
+        "instruction": "차트(mat_01)와 메모(mat_03)를 근거로 현재 업황을 한 문장으로 진단하고, 수주와 재고 흐름이 말해주는 핵심 리스크를 적으세요.",
+        "required_materials": [
+          "mat_01",
+          "mat_03"
+        ],
+        "expected_action": "진단"
+      },
+      {
+        "task_id": "task_2",
+        "instruction": "비교표(mat_02)를 보고 3개 후보 중 우선 검토할 대상을 1개 고르고, 그 이유를 강점 1개와 약점 1개를 묶어 설명하세요.",
+        "required_materials": [
+          "mat_02"
+        ],
+        "expected_action": "우선순위 판단"
+      },
+      {
+        "task_id": "task_3",
+        "instruction": "앞선 진단과 우선순위를 종합해 다음 분기 투자 의견을 1개만 제시하고, 바로 실행할 수 있는 후속 조치를 1가지 쓰세요.",
+        "required_materials": [
+          "mat_01",
+          "mat_02",
+          "mat_03"
+        ],
+        "expected_action": "추천"
+      }
+    ],
+    "submission_format": {
+      "type": "서술형 답안",
+      "estimated_time_minutes": 15,
+      "required_sections": [
+        "업황 진단",
+        "우선순위 판단",
+        "최종 추천"
+      ],
+      "length_hint": "400~700자"
+    }
+  },
+  "evaluation": {
+    "expected_insights": [
+      "수주는 늘지만 재고도 함께 올라 업황은 개선 초입이지만 부담이 남아 있다는 점을 파악해야 한다.",
+      "3개 후보 중 수익성과 안정성이 가장 좋은 대상을 우선 검토 대상으로 고르는 판단이 필요하다.",
+      "최종 의견은 보수적 또는 중립적으로 정리하고, 재고 조정이 더 확인되면 의견을 조정하는 방식이 적절하다."
+    ],
+    "rubric": [
+      {
+        "criterion": "업황 흐름 해석",
+        "description": "차트와 메모를 함께 읽어 수주 상승과 재고 부담을 정확히 진단하는지 평가한다.",
+        "points": 35,
+        "linked_evidence": [
+          "정보 수집",
+          "정보, 자료 분석",
+          "산수와 수학"
+        ]
+      },
+      {
+        "criterion": "후보 비교의 타당성",
+        "description": "비교표의 강점과 약점을 바탕으로 우선 검토 대상을 합리적으로 고르는지 평가한다.",
+        "points": 25,
+        "linked_evidence": [
+          "논리적 분석",
+          "경제와 회계",
+          "판단과 의사결정"
+        ]
+      },
+      {
+        "criterion": "리스크 반영",
+        "description": "재고 부담, 가격 압박, 원가 안정 같은 정성 정보를 최종 판단에 반영하는지 평가한다.",
+        "points": 20,
+        "linked_evidence": [
+          "의사 결정, 문제점 해결",
+          "정보의 의미 해석",
+          "사람들에게 조언, 상담"
+        ]
+      },
+      {
+        "criterion": "실행 가능한 추천 제시",
+        "description": "다음 분기 투자 의견과 후속 조치를 짧고 명확하게 제시하는지 평가한다.",
+        "points": 20,
+        "linked_evidence": [
+          "목표, 전략 수립",
+          "경영 및 행정",
+          "사무"
+        ]
+      }
+    ]
+  },
+  "reliability": {
+    "score": 1.0,
+    "raw_score": 100,
+    "passed": true,
+    "calculated_by": "validator.v1",
+    "human_review_required": true,
+    "warning_count": 0,
+    "fail_count": 0,
+    "repair_count": 0,
+    "score_breakdown": {
+      "schema": {
+        "max": 20,
+        "earned": 20
+      },
+      "system_decisions": {
+        "max": 15,
+        "earned": 15
+      },
+      "materials": {
+        "max": 20,
+        "earned": 20
+      },
+      "mission_facts": {
+        "max": 15,
+        "earned": 15
+      },
+      "evidence": {
+        "max": 20,
+        "earned": 20
+      },
+      "evaluation": {
+        "max": 10,
+        "earned": 10
+      }
+    }
+  },
+  "evidence_chain": {
+    "created_by": "validator.v1",
+    "source_exec_job": {
+      "exec_job_id": "exec_001",
+      "text": "국내외 경제상황 및 산업·기업별 정보를 수집·분석한다.",
+      "source_ref": {
+        "file": "K000001179/dtlGb_2.xml",
+        "field": "jobsDo.execJob",
+        "index": 1
+      },
+      "selection_reason": "Pilot config selected exec_001."
+    },
+    "linked_evidence": {
+      "activities": [
+        {
+          "name": "정보 수집",
+          "score": 98,
+          "description": "모든 관련 자료에서 정보를 수집, 관찰하기 중요도",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000001179/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 1
+          }
+        },
+        {
+          "name": "목표, 전략 수립",
+          "score": 97,
+          "description": "장기 목표를 세우고 그 목표를 달성하기 위한 전략과 실행할 목록을 명시하기 활동 중요도",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000001179/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 2
+          }
+        },
+        {
+          "name": "사물, 행동, 사건 파악",
+          "score": 95,
+          "description": "차이점과 유사점을 분류하고 어떤 상황에서 변화를 알아차림으로써 정보를 파악하기 활동 중요도",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000001179/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 3
+          }
+        },
+        {
+          "name": "정보의 의미 해석",
+          "score": 95,
+          "description": "정보가 뜻하는 바와 그것이 어떻게 사용되는지 번역하거나 설명하기 활동 중요도",
+          "rank": 4,
+          "source_ref": {
+            "file": "K000001179/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 4
+          }
+        },
+        {
+          "name": "사람들에게 조언, 상담",
+          "score": 94,
+          "description": "경영진이나 다른 사람들에게 기술, 시스템 또는 관련 절차를 전문적으로 조언하고 안내하기 활동 중요도",
+          "rank": 5,
+          "source_ref": {
+            "file": "K000001179/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 5
+          }
+        }
+      ],
+      "abilities": [
+        {
+          "name": "수리력",
+          "score": 99,
+          "description": "어떤 문제를 해결하기 위해 수학을 사용한다",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000001179/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 1
+          }
+        },
+        {
+          "name": "판단과 의사결정",
+          "score": 95,
+          "description": "이득과 손실을 평가해서 결정을 내린다",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000001179/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 2
+          }
+        },
+        {
+          "name": "선택적 집중력",
+          "score": 94,
+          "description": "주의를 산만하게 하는 자극에도 불구하고 원하는 일에 집중한다",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000001179/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 3
+          }
+        }
+      ],
+      "knowledge": [
+        {
+          "name": "경제와 회계",
+          "score": 97,
+          "description": "돈의 흐름, 은행업무, 그리고 재무자료의 보고와 분석과 같은 경제 및 회계원리에 관한 지식",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000001179/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 1
+          }
+        },
+        {
+          "name": "영어",
+          "score": 84,
+          "description": "영어를 읽고, 쓰고, 듣고 말하는데 필요한 지식",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000001179/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 2
+          }
+        },
+        {
+          "name": "사무",
+          "score": 80,
+          "description": "워드 프로세스, 문서처리 및 기타 다른 사무절차에 관한 지식",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000001179/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 3
+          }
+        }
+      ],
+      "work_environment": [
+        {
+          "name": "치열한 경쟁",
+          "score": 93,
+          "description": "동료 혹은 다른 사람들과의 경쟁 정도",
+          "rank": 1,
+          "source_ref": {
+            "file": "K000001179/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobsEnv",
+            "index": 1
+          }
+        },
+        {
+          "name": "마감시간",
+          "score": 89,
+          "description": "마감시간을 엄격하게 지켜야하는 빈도",
+          "rank": 2,
+          "source_ref": {
+            "file": "K000001179/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobsEnv",
+            "index": 2
+          }
+        },
+        {
+          "name": "이메일 이용하기",
+          "score": 87,
+          "description": "업무 수행하면서 이메일 사용하는 정도",
+          "rank": 3,
+          "source_ref": {
+            "file": "K000001179/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobsEnv",
+            "index": 3
+          }
+        }
+      ]
+    },
+    "material_evidence_map": [
+      {
+        "material_id": "mat_01",
+        "supported_by": [
+          "정보 수집",
+          "정보, 자료 분석",
+          "산수와 수학"
+        ]
+      },
+      {
+        "material_id": "mat_02",
+        "supported_by": [
+          "경제와 회계",
+          "논리적 분석",
+          "판단과 의사결정"
+        ]
+      },
+      {
+        "material_id": "mat_03",
+        "supported_by": [
+          "정보 수집",
+          "정보의 의미 해석",
+          "사람들에게 조언, 상담",
+          "의사 결정, 문제점 해결"
+        ]
+      }
+    ],
+    "items": [
+      {
+        "target_type": "material",
+        "target_id": "mat_01",
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "period",
+          "trend_pattern",
+          "main_issue"
+        ],
+        "source_refs": [
+          {
+            "file": "K000001179/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 1,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001179/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 7,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001179/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 5,
+            "source_root": "data/api_raw"
+          }
+        ],
+        "connection_reason": "직업 profile evidence와 생성 자료가 간접 연결됨",
+        "traceability": "indirect"
+      },
+      {
+        "target_type": "material",
+        "target_id": "mat_02",
+        "mission_fact_refs": [
+          "org_name",
+          "domain",
+          "decision_goal",
+          "main_issue"
+        ],
+        "source_refs": [
+          {
+            "file": "K000001179/dtlGb_5.xml",
+            "field": "ablKnwEnv.Knwldg",
+            "index": 1,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001179/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 4,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001179/dtlGb_5.xml",
+            "field": "ablKnwEnv.jobAbil",
+            "index": 2,
+            "source_root": "data/api_raw"
+          }
+        ],
+        "connection_reason": "직업 profile evidence와 생성 자료가 간접 연결됨",
+        "traceability": "indirect"
+      },
+      {
+        "target_type": "material",
+        "target_id": "mat_03",
+        "mission_fact_refs": [
+          "org_name",
+          "feedback_themes",
+          "main_issue",
+          "decision_goal"
+        ],
+        "source_refs": [
+          {
+            "file": "K000001179/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 1,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001179/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 4,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001179/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 5,
+            "source_root": "data/api_raw"
+          },
+          {
+            "file": "K000001179/dtlGb_7.xml",
+            "field": "jobActv.jobActvImprtnc",
+            "index": 6,
+            "source_root": "data/api_raw"
+          }
+        ],
+        "connection_reason": "직업 profile evidence와 생성 자료가 간접 연결됨",
+        "traceability": "indirect"
+      }
+    ]
+  },
+  "axis_signals_derived": {
+    "AX1": 0.5833,
+    "AX2": 0.0,
+    "AX3": 0.2167,
+    "AX4": 0.1333,
+    "AX5": 0.0667
+  }
+}

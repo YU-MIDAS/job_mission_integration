@@ -1,0 +1,28 @@
+name: Pipeline Sanity
+
+on:
+  pull_request:
+    paths:
+      - "pipeline/**"
+      - "package.json"
+  push:
+    branches:
+      - main
+    paths:
+      - "pipeline/**"
+      - "package.json"
+
+jobs:
+  py-compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compile pipeline scripts
+        run: python -m py_compile pipeline/*.py

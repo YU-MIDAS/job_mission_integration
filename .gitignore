@@ -1,0 +1,25 @@
+# KNOW 원본 XML (대용량)
+data/raw/K*/
+data/raw/job_data_raw.zip
+data/raw/jobsList.txt
+
+# job_mission 출력물 (생성 아티팩트)
+outputs/
+
+# Python 캐시
+__pycache__/
+*.pyc
+*.pyo
+
+# Node
+node_modules/
+
+# 환경 설정
+.env
+.env.server
+.env.local
+
+# 로그·리포트
+reports/
+playwright-report/
+test-results/

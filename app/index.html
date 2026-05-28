@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>JOBSIM — 직무 시뮬레이션 적성 탐색</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#08090a;--surface:#111215;--border:#1e2025;--muted:#4a4f5c;
+      --text:#f7f8f8;--sub:#8a8f9c;--accent:#5e6ad2;--accent-hi:#7b83e0;
+      --danger:#e05e5e;--success:#5ec98e;--warn:#d2a85e;--r:10px;--mw:720px;
+    }
+    html{background:var(--bg);color:var(--text);font-family:'Pretendard',-apple-system,sans-serif;font-size:15px;line-height:1.65}
+    body{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px 80px}
+    .page{width:100%;max-width:var(--mw);animation:fi .25s ease}
+    @keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes dotBounce{0%,80%,100%{transform:translateY(0);opacity:.3}40%{transform:translateY(-12px);opacity:1}}
+    .loading-dots{display:inline-flex;gap:8px;align-items:center;height:32px}
+    .loading-dots span{width:10px;height:10px;border-radius:50%;background:var(--accent);animation:dotBounce 1.2s ease-in-out infinite}
+    .loading-dots span:nth-child(2){animation-delay:.15s}
+    .loading-dots span:nth-child(3){animation-delay:.3s}
+
+    /* 브랜드 */
+    .brand{display:flex;align-items:center;gap:10px;margin-bottom:48px}
+    .brand-logo{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff}
+    .brand-name{font-size:14px;font-weight:600}
+
+    /* 타이포 */
+    .stitle{font-size:22px;font-weight:700;margin-bottom:8px;letter-spacing:-.5px}
+    .sdesc{color:var(--sub);font-size:14px;margin-bottom:32px}
+
+    /* 카드 */
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px}
+
+    /* 직무 선택 그리드 */
+    .job-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:28px}
+    .job-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:20px 18px;cursor:pointer;transition:border-color .15s,background .15s}
+    .job-card:hover{border-color:var(--accent)}
+    .job-card.sel{border-color:var(--accent);background:#14163a}
+    .job-card .jicon{font-size:26px;margin-bottom:10px}
+    .job-card .jname{font-size:14px;font-weight:600;margin-bottom:4px}
+    .job-card .jsub{font-size:12px;color:var(--sub)}
+
+    /* 인풋 */
+    textarea{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-family:inherit;font-size:14px;line-height:1.7;padding:14px 16px;resize:vertical;min-height:120px;outline:none;transition:border-color .15s}
+    textarea:focus{border-color:var(--accent)}
+    textarea::placeholder{color:var(--muted)}
+
+    /* 버튼 */
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .15s;border:none;outline:none}
+    .btn-p{background:var(--accent);color:#fff}.btn-p:hover{opacity:.85}
+    .btn-g{background:transparent;border:1.5px solid var(--border);color:var(--sub)}.btn-g:hover{border-color:var(--accent);color:var(--text)}
+    .btn:disabled{opacity:.35;cursor:not-allowed}
+
+    /* 진행바 */
+    .prog{width:100%;height:2px;background:var(--border);border-radius:2px;margin-bottom:32px}
+    .prog-f{height:100%;background:var(--accent);border-radius:2px;transition:width .3s ease}
+
+    /* 배지 */
+    .badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#1a1c2e;color:var(--accent)}
+
+    /* 미션 */
+    .mhdr{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+    .mstep{font-size:12px;color:var(--sub)}
+    .scenario{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-bottom:20px;font-size:14px;color:var(--sub);line-height:1.8}
+    .task-lbl{font-size:12px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+    .task-txt{font-size:15px;font-weight:500;line-height:1.7}
+
+    /* 선택지 */
+    .opt-list{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+    .opt-btn{background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:14px 18px;text-align:left;color:var(--text);font-family:inherit;font-size:14px;cursor:pointer;transition:border-color .15s,background .15s;line-height:1.5}
+    .opt-btn:hover{border-color:var(--accent)}.opt-btn.sel{border-color:var(--accent);background:#14163a}
+
+    /* 사전질문 */
+    .pq-lbl{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:12px}
+    .pq-txt{font-size:15px;font-weight:500;margin-bottom:12px}
+
+    /* 결과 섹션 */
+    .rs{margin-bottom:40px}
+    .rs-title{font-size:14px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.8px;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+    .job-intro-card{border:1px solid var(--border);border-radius:10px;padding:18px 20px;background:var(--surface);margin-bottom:14px}
+    .job-intro-hdr{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    .job-intro-icon{font-size:22px}
+    .job-intro-name{font-size:16px;font-weight:700}
+    .job-intro-summary{font-size:13px;color:var(--sub);line-height:1.6;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+    .job-intro-section{margin-bottom:12px}
+    .job-intro-section:last-child{margin-bottom:0}
+    .job-intro-label{font-size:11px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px}
+    .job-intro-list{margin:0;padding-left:18px;font-size:13px;line-height:1.7;color:var(--text)}
+    .job-intro-list li{margin-bottom:2px}
+    .job-intro-daily{font-size:13px;line-height:1.7;color:var(--text);padding:8px 12px;background:var(--bg);border-radius:6px;border-left:2px solid var(--accent)}
+
+    /* 레이더 */
+    .radar-wrap{display:flex;justify-content:center;margin-bottom:12px}
+    .axis-note{font-size:12px;color:var(--sub);margin-bottom:12px}
+    .axis-score-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
+    .axis-score{border:1px solid var(--border);border-radius:8px;padding:10px;background:var(--bg)}
+    .axis-score-unmeasured{opacity:.9;border-style:dashed}
+    .axis-score-k{font-size:11px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .axis-score-v{font-size:18px;font-weight:700;color:var(--text)}
+    .axis-score-sub{font-size:11px;color:var(--sub)}
+    .axis-score-ref{font-size:11px;color:var(--warn)}
+    .ev-list{display:flex;flex-direction:column;gap:10px}
+    .ev-card{border:1px solid var(--border);border-radius:8px;padding:14px 16px;background:var(--surface)}
+    .ev-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}
+    .ev-title{font-size:14px;font-weight:700}
+    .ev-meta{font-size:12px;color:var(--sub);white-space:nowrap}
+    .ev-low{color:var(--warn)}
+    .ev-quotes{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+    .ev-quote{border-left:2px solid var(--accent);padding-left:10px;color:var(--text);font-size:13px}
+    .ev-rationale{font-size:12px;color:var(--sub);line-height:1.6}
+    .log-note{font-size:12px;color:var(--sub);border:1px solid var(--border);border-radius:8px;padding:12px 14px;background:var(--bg)}
+
+    /* 새 evidence 카드 */
+    .ev-card2{border:1px solid var(--border);border-radius:10px;padding:16px 18px;background:var(--surface);transition:border-color .15s}
+    .ev-card2-zero{opacity:.6}
+    .ev-card2-high{border-color:rgba(94,210,130,.25);background:rgba(94,210,130,.04)}
+    .ev2-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+    .ev2-icon{font-size:22px;min-width:30px}
+    .ev2-title-wrap{flex:1}
+    .ev2-name{font-size:14px;font-weight:700;margin-bottom:2px}
+    .ev2-desc{font-size:11px;color:var(--sub)}
+    .ev2-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+    .ev2-msg{font-size:13px;color:var(--sub);margin-bottom:10px;line-height:1.6}
+    .ev-found{background:var(--bg);border-radius:7px;padding:10px 12px;margin-bottom:8px}
+    .ev-found-behavior{font-size:12px;font-weight:600;color:var(--accent-hi);margin-bottom:4px}
+    .ev-found-quote{font-size:12px;color:var(--sub);border-left:2px solid var(--accent);padding-left:8px;line-height:1.6}
+    .ev-none{font-size:12px;color:var(--muted);background:var(--bg);border-radius:6px;padding:8px 10px;margin-bottom:6px}
+    .ev-lowconf{font-size:12px;color:var(--warn);margin-bottom:6px}
+    .ev2-conf{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--sub);margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+    .conf-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--border)}
+    .conf-dot.filled{background:var(--accent)}
+
+    /* 적합도 바 */
+    .compat-list{display:flex;flex-direction:column;gap:20px}
+    .compat-row{display:flex;flex-direction:column;gap:6px}
+    .compat-top{display:flex;align-items:center;gap:14px}
+    .compat-name{font-size:13px;font-weight:600;min-width:130px}
+    .compat-bw{flex:1;height:8px;background:var(--border);border-radius:4px}
+    .compat-bf{height:100%;border-radius:4px;transition:width .6s ease}
+    .compat-sc{font-size:13px;font-weight:700;min-width:44px;text-align:right}
+    .compat-ref{font-size:11px;color:var(--sub);padding-left:2px}
+    .sil-warn{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:5px;font-size:11px;font-weight:600;color:var(--warn);background:rgba(210,168,94,.1);border:1px solid rgba(210,168,94,.25);margin-top:2px}
+
+    /* 사분면 */
+    .quad-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .quad-cell{border:1.5px solid var(--border);border-radius:8px;padding:16px 14px;font-size:13px}
+    .quad-cell.hl{border-color:var(--accent);background:#14163a}
+    .quad-jname{font-weight:700;margin-bottom:4px;font-size:14px}
+    .quad-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+    .quad-desc{color:var(--sub);font-size:12px;line-height:1.5}
+    .q1 .quad-lbl{color:var(--success)}.q2 .quad-lbl{color:var(--warn)}.q3 .quad-lbl{color:var(--accent-hi)}.q4 .quad-lbl{color:var(--danger)}
+
+    /* 직업 추천 */
+    .rec-list{display:flex;flex-direction:column;gap:10px}
+    /* 추천 카드: 직업명 + 유사도 % 바 하나 */
+    .rec-card{background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:16px 18px}
+    .rec-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+    .rec-jname{font-size:14px;font-weight:600}
+    .rec-pct{font-size:13px;font-weight:700;color:var(--accent)}
+    /* 5축 매치바 */
+    .ax-bars{display:flex;flex-direction:column;gap:6px}
+    .ax-row{display:flex;align-items:center;gap:8px}
+    .ax-lbl{font-size:11px;color:var(--sub);min-width:60px}
+    .ax-bw{flex:1;height:5px;background:var(--border);border-radius:3px;position:relative}
+    .ax-bf-job{height:100%;border-radius:3px;background:var(--warn);opacity:.6;position:absolute;top:0;left:0}
+    .ax-bf-me{height:100%;border-radius:3px;background:var(--accent);position:absolute;top:0;left:0}
+    .ax-vals{font-size:10px;color:var(--sub);min-width:60px;text-align:right}
+
+    /* gap table */
+    .gap-tbl{width:100%;border-collapse:collapse}
+    .gap-tbl th,.gap-tbl td{padding:12px 14px;text-align:left;font-size:13px;border-bottom:1px solid var(--border);vertical-align:top}
+    .gap-tbl th{color:var(--sub);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+    .gap-tbl td:first-child{color:var(--accent);font-weight:600;white-space:nowrap}
+
+    hr{border:none;border-top:1px solid var(--border);margin:28px 0}
+
+    /* === 새 미션 스키마 (mission_output.v1) === */
+    /* 시나리오 세부 영역 */
+    .scenario{color:var(--text)}
+    .scenario .sc-tag{display:inline-block;font-size:10px;font-weight:700;color:var(--accent);background:#14163a;padding:2px 7px;border-radius:4px;margin-right:8px;letter-spacing:.4px}
+    .scenario .sc-role{margin-bottom:8px;font-size:13px;color:var(--sub)}
+    .scenario .sc-context{font-size:14px;color:var(--text);margin-bottom:12px;line-height:1.7}
+    .scenario .sc-issue,.scenario .sc-goal{margin-bottom:8px;font-size:13.5px}
+    .scenario .sc-constraints{margin-top:10px;font-size:13px}
+    .scenario .sc-constraints ul{margin:4px 0 0 28px;padding:0;color:var(--sub);line-height:1.7}
+    .scenario .sc-constraints li{margin-bottom:2px}
+
+    /* 자료 묶음 */
+    .materials{display:flex;flex-direction:column;gap:14px;margin-bottom:20px}
+    .mat-hdr{font-size:12px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.8px}
+    .material{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px}
+    .mat-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+    .mat-desc{font-size:12px;color:var(--sub);margin-bottom:8px;line-height:1.6}
+    .mat-use{font-size:11px;color:var(--sub);font-style:italic;margin-bottom:10px;opacity:.7}
+    .mat-body{margin-top:8px}
+    .mat-empty{font-size:12px;color:var(--muted);padding:6px 0}
+
+    /* 차트 */
+    .chart-svg{width:100%;max-width:100%;height:auto;display:block;background:var(--bg);border-radius:6px;padding:6px}
+    .chart-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;justify-content:center;font-size:11px;color:var(--sub)}
+    .leg-item{display:flex;align-items:center;gap:5px}
+    .leg-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+    /* 표 */
+    .mat-table{width:100%;border-collapse:collapse;font-size:12.5px}
+    .mat-table th,.mat-table td{border:1px solid var(--border);padding:7px 10px;text-align:left}
+    .mat-table th{background:var(--bg);color:var(--accent);font-weight:600}
+    .mat-table tbody tr:nth-child(even){background:rgba(255,255,255,.02)}
+
+    /* 메모/로그 */
+    .mat-items{margin:0;padding-left:20px;font-size:13px;line-height:1.7;color:var(--text)}
+    .mat-entries,.mat-cards{display:flex;flex-direction:column;gap:8px;font-size:13px}
+    .mat-entry,.mat-card-item{background:var(--bg);padding:8px 12px;border-radius:6px}
+    .mat-thread{display:flex;flex-direction:column;gap:6px;font-size:13px}
+    .mat-msg{padding:6px 10px;background:var(--bg);border-radius:6px}
+    .mat-log{background:var(--bg);border-radius:6px;padding:10px 12px;font-family:ui-monospace,Menlo,Monaco,Consolas,monospace;font-size:11.5px;color:var(--sub);overflow-x:auto;line-height:1.5;white-space:pre-wrap}
+    .mat-fallback pre{background:var(--bg);padding:10px;border-radius:6px;font-size:11px;overflow-x:auto;color:var(--sub)}
+    .mat-author{font-size:12px;color:var(--sub);text-align:right}
+
+    /* 수행 과제 묶음 */
+    .tasks-block{margin-bottom:18px}
+    .tasks-list{margin:6px 0 0 22px;padding:0;font-size:14.5px;line-height:1.7;color:var(--text)}
+    .tasks-list li{margin-bottom:6px}
+
+    /* 제출 안내 */
+    .submit-hint{background:var(--bg);border:1px dashed var(--border);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12.5px;color:var(--sub);line-height:1.8}
+    .submit-hint strong{color:var(--accent);font-weight:600}
+
+    /* 로딩/에러 화면 */
+    .boot-state{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:18px;text-align:center}
+    .boot-state .boot-msg{font-size:15px;font-weight:600}
+    .boot-state .boot-sub{font-size:13px;color:var(--sub);max-width:360px;line-height:1.6}
+    .boot-state.err .boot-msg{color:var(--danger)}
+
+    @media(max-width:520px){
+      .job-grid{grid-template-columns:1fr 1fr}
+      .quad-grid{grid-template-columns:1fr}
+      .axis-score-grid{grid-template-columns:1fr 1fr}
+      .mat-table{font-size:11.5px}
+      .mat-table th,.mat-table td{padding:5px 7px}
+    }
+  </style>
+</head>
+<body>
+<div id="app" class="page"></div>
+<script type="module" src="./main.js"></script>
+</body>
+</html>

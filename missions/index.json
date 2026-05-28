@@ -1,0 +1,158 @@
+{
+  "schema_version": "missions-index.v1",
+  "generated_at": "2026-05-28",
+  "jobs": [
+    {
+      "job_cd": "K000000997",
+      "job_name": "상품기획자",
+      "job_lrcl_nm": "경영·사무·금융·보험직",
+      "job_mdcl_nm": "광고·조사·상품기획·행사기획 전문가",
+      "icon": "📦",
+      "mission_keys": [
+        "K000000997_01",
+        "K000000997_02"
+      ]
+    },
+    {
+      "job_cd": "K000001080",
+      "job_name": "데이터분석가(빅데이터분석가)",
+      "job_lrcl_nm": "연구직 및 공학 기술직",
+      "job_mdcl_nm": "데이터·네트워크 및 시스템 운영 전문가",
+      "icon": "📊",
+      "mission_keys": [
+        "K000001080_01",
+        "K000001080_02"
+      ]
+    },
+    {
+      "job_cd": "K000001179",
+      "job_name": "투자분석가",
+      "job_lrcl_nm": "경영·사무·금융·보험직",
+      "job_mdcl_nm": "금융·보험 전문가",
+      "icon": "💹",
+      "mission_keys": [
+        "K000001179_01"
+      ]
+    },
+    {
+      "job_cd": "K000007519",
+      "job_name": "보험상품개발자",
+      "job_lrcl_nm": "경영·사무·금융·보험직",
+      "job_mdcl_nm": "금융·보험 전문가",
+      "icon": "🛡️",
+      "mission_keys": [
+        "K000007519_01"
+      ]
+    }
+  ],
+  "missions": [
+    {
+      "key": "K000000997_01",
+      "path": "scenarios/K000000997_01.json",
+      "mission_id": "mission_K000000997_normal_001_b224708",
+      "job_cd": "K000000997",
+      "job_name": "상품기획자",
+      "difficulty": "normal",
+      "title": "시장 반응을 보고 우선 타깃 정하기",
+      "task_type": "research_and_analysis",
+      "estimated_time_minutes": 15,
+      "axis_signals": {
+        "AX1": 0.1333,
+        "AX2": 0.2667,
+        "AX3": 0.4333,
+        "AX4": 0.0833,
+        "AX5": 0.0833
+      }
+    },
+    {
+      "key": "K000000997_02",
+      "path": "scenarios/K000000997_02.json",
+      "mission_id": "mission_K000000997_normal_001_b144211",
+      "job_cd": "K000000997",
+      "job_name": "상품기획자",
+      "difficulty": "normal",
+      "title": "판매 흐름과 고객 반응을 바탕으로 개선 우선순위 정하기",
+      "task_type": "research_and_analysis",
+      "estimated_time_minutes": 15,
+      "axis_signals": {
+        "AX1": 0.275,
+        "AX2": 0.275,
+        "AX3": 0.35,
+        "AX4": 0.1,
+        "AX5": 0.0
+      }
+    },
+    {
+      "key": "K000001080_01",
+      "path": "scenarios/K000001080_01.json",
+      "mission_id": "mission_K000001080_normal_001_b224708",
+      "job_cd": "K000001080",
+      "job_name": "데이터분석가(빅데이터분석가)",
+      "difficulty": "normal",
+      "title": "주문 정체 원인 진단과 주 KPI 재설계",
+      "task_type": "research_and_analysis",
+      "estimated_time_minutes": 15,
+      "axis_signals": {
+        "AX1": 0.5333,
+        "AX2": 0.1167,
+        "AX3": 0.35,
+        "AX4": 0.0,
+        "AX5": 0.0
+      }
+    },
+    {
+      "key": "K000001080_02",
+      "path": "scenarios/K000001080_02.json",
+      "mission_id": "mission_K000001080_normal_001_b144211",
+      "job_cd": "K000001080",
+      "job_name": "데이터분석가(빅데이터분석가)",
+      "difficulty": "normal",
+      "title": "야간 배치 지연 원인 진단과 개선안 제안",
+      "task_type": "research_and_analysis",
+      "estimated_time_minutes": 15,
+      "axis_signals": {
+        "AX1": 0.5875,
+        "AX2": 0.1792,
+        "AX3": 0.2333,
+        "AX4": 0.0,
+        "AX5": 0.0
+      }
+    },
+    {
+      "key": "K000001179_01",
+      "path": "scenarios/K000001179_01.json",
+      "mission_id": "mission_K000001179_normal_001_b144211",
+      "job_cd": "K000001179",
+      "job_name": "투자분석가",
+      "difficulty": "normal",
+      "title": "수주·재고 흐름을 보고 우선 검토 대상을 정하기",
+      "task_type": "research_and_analysis",
+      "estimated_time_minutes": 15,
+      "axis_signals": {
+        "AX1": 0.5833,
+        "AX2": 0.0,
+        "AX3": 0.2167,
+        "AX4": 0.1333,
+        "AX5": 0.0667
+      }
+    },
+    {
+      "key": "K000007519_01",
+      "path": "scenarios/K000007519_01.json",
+      "mission_id": "mission_K000007519_normal_001_b144211",
+      "job_cd": "K000007519",
+      "job_name": "보험상품개발자",
+      "difficulty": "normal",
+      "title": "소액 건강보장보험 출시안 선택과 제안",
+      "task_type": "planning_and_proposal",
+      "estimated_time_minutes": 15,
+      "axis_signals": {
+        "AX1": 0.825,
+        "AX2": 0.0,
+        "AX3": 0.175,
+        "AX4": 0.0,
+        "AX5": 0.0
+      }
+    }
+  ]
+}
