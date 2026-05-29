@@ -2,6 +2,7 @@ import "dotenv/config";
 import { randomUUID } from "node:crypto";
 import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
 import express from "express";
+import OpenAI from "openai";
 import fs from "node:fs";
 import { promises as fsp } from "node:fs";
 import os from "node:os";
@@ -37,6 +38,7 @@ const API_RAW_DIR = path.join(__dirname, "data/api_raw");
 const ADDITIONAL_SEARCH_DIR = path.join(__dirname, "data/additional_search");
 const EVALUATION_LOG_PREFIX = "evaluation-logs-";
 const OPENAI_EVAL_MODEL = process.env.OPENAI_EVAL_MODEL ?? "gpt-5-nano";
+const OPENAI_GENERATION_MODEL = process.env.OPENAI_GENERATION_MODEL ?? "gpt-5.4-nano";
 const API_SHARED_TOKEN = (process.env.API_SHARED_TOKEN ?? "").trim();
 const COMPATIBILITY_SCORE_GAMMA = Number(process.env.COMPATIBILITY_SCORE_GAMMA ?? 1.5);
 const ADMIN_LOG_LIMIT = 500;
@@ -101,6 +103,7 @@ type GenerationRun = {
 type OpenAiAdminStatus = {
   configured: boolean;
   eval_model: string;
+  generation_model: string;
   generation_api_key_env: "OPENAI_API_KEY";
 };
 
@@ -108,6 +111,7 @@ const evaluateRateBuckets = new Map<string, RateLimitBucket>();
 const generationRuns = new Map<string, GenerationRun>();
 let lastLogCleanupAt = 0;
 let activeGenerationRunId: string | null = null;
+let generationStartupInProgress = false;
 
 const GenerationRunRequestSchema = z.object({
   jobCode: z.string().regex(/^K\d+$/),
@@ -131,6 +135,10 @@ const EVALUATE_RATE_LIMIT_WINDOW_MS = Math.max(
 const EVALUATE_RATE_LIMIT_MAX = positiveIntFromEnv(
   process.env.EVALUATE_RATE_LIMIT_MAX,
   10
+);
+const OPENAI_PREFLIGHT_TIMEOUT_MS = Math.max(
+  1_000,
+  positiveIntFromEnv(process.env.OPENAI_PREFLIGHT_TIMEOUT_MS, 15_000)
 );
 
 function loadJobWeightCatalog() {
@@ -258,8 +266,90 @@ function openAiAdminStatus(): OpenAiAdminStatus {
   return {
     configured: Boolean(process.env.OPENAI_API_KEY),
     eval_model: OPENAI_EVAL_MODEL,
+    generation_model: OPENAI_GENERATION_MODEL,
     generation_api_key_env: "OPENAI_API_KEY"
   };
+}
+
+type OpenAiGenerationPreflightFailure = {
+  httpStatus: number;
+  code: string;
+  message: string;
+  details: Record<string, unknown>;
+};
+
+type OpenAiGenerationPreflightResult =
+  | { ok: true }
+  | ({ ok: false } & OpenAiGenerationPreflightFailure);
+
+function mapOpenAiPreflightError(error: unknown): OpenAiGenerationPreflightFailure {
+  const candidate = error as {
+    status?: unknown;
+    code?: unknown;
+    type?: unknown;
+    param?: unknown;
+    message?: unknown;
+    name?: unknown;
+  };
+  const upstreamStatus = typeof candidate.status === "number" ? candidate.status : undefined;
+  const upstreamCode = typeof candidate.code === "string" ? candidate.code : undefined;
+  const upstreamType = typeof candidate.type === "string" ? candidate.type : undefined;
+  const upstreamParam = typeof candidate.param === "string" ? candidate.param : undefined;
+  const message = typeof candidate.message === "string" && candidate.message
+    ? candidate.message
+    : "OpenAI preflight request failed.";
+
+  let code = "OPENAI_PREFLIGHT_FAILED";
+  if (upstreamStatus === 401 || upstreamStatus === 403) code = "OPENAI_AUTH_FAILED";
+  else if (upstreamStatus === 429) code = "OPENAI_RATE_LIMITED";
+  else if (upstreamStatus !== undefined && upstreamStatus >= 500) code = "OPENAI_SERVER_ERROR";
+  else if (upstreamStatus === 400 || upstreamStatus === 404) code = "OPENAI_BAD_REQUEST";
+  else if (!upstreamStatus) code = "OPENAI_NETWORK_OR_TIMEOUT";
+
+  return {
+    httpStatus: 503,
+    code,
+    message: `OpenAI generation preflight failed: ${message}`,
+    details: {
+      model: OPENAI_GENERATION_MODEL,
+      upstream_status: upstreamStatus ?? null,
+      upstream_code: upstreamCode ?? null,
+      upstream_type: upstreamType ?? null,
+      upstream_param: upstreamParam ?? null
+    }
+  };
+}
+
+async function checkOpenAiGenerationPreflight(): Promise<OpenAiGenerationPreflightResult> {
+  const apiKey = process.env.OPENAI_API_KEY?.trim();
+  if (!apiKey) {
+    return {
+      ok: false,
+      httpStatus: 503,
+      code: "OPENAI_API_KEY_MISSING",
+      message: "OPENAI_API_KEY is not set. Mission generation was not started.",
+      details: {
+        model: OPENAI_GENERATION_MODEL,
+        key_env: "OPENAI_API_KEY"
+      }
+    };
+  }
+
+  try {
+    const client = new OpenAI({
+      apiKey,
+      timeout: OPENAI_PREFLIGHT_TIMEOUT_MS,
+      maxRetries: 0
+    });
+    await client.responses.create({
+      model: OPENAI_GENERATION_MODEL,
+      input: "Reply with OK.",
+      max_output_tokens: 16
+    });
+    return { ok: true };
+  } catch (error) {
+    return { ok: false, ...mapOpenAiPreflightError(error) };
+  }
 }
 
 function buildMissionPreview(runDir: string): MissionPreview | null {
@@ -620,7 +710,7 @@ app.get("/api/admin/mission-generation/jobs", requireApiToken, (_req, res) => {
   });
 });
 
-app.post("/api/admin/mission-generation/runs", requireApiToken, (req, res) => {
+app.post("/api/admin/mission-generation/runs", requireApiToken, async (req, res) => {
   const parsed = GenerationRunRequestSchema.safeParse(req.body);
   if (!parsed.success) {
     return sendApiError(
@@ -633,13 +723,13 @@ app.post("/api/admin/mission-generation/runs", requireApiToken, (req, res) => {
   }
 
   const activeRun = activeGenerationRunId ? generationRuns.get(activeGenerationRunId) : null;
-  if (activeRun?.status === "running") {
+  if (generationStartupInProgress || activeRun?.status === "running") {
     return sendApiError(
       res,
       409,
       "GENERATION_ALREADY_RUNNING",
       "Another mission generation run is already in progress.",
-      { run_id: activeRun.runId }
+      activeRun ? { run_id: activeRun.runId } : { phase: "preflight" }
     );
   }
 
@@ -655,6 +745,19 @@ app.post("/api/admin/mission-generation/runs", requireApiToken, (req, res) => {
       "GENERATION_JOB_DISABLED",
       "This job cannot be generated until data/additional_search contains a matching Markdown file.",
       { job_code: selectedJob.jobCode }
+    );
+  }
+
+  generationStartupInProgress = true;
+  const preflight = await checkOpenAiGenerationPreflight();
+  if (!preflight.ok) {
+    generationStartupInProgress = false;
+    return sendApiError(
+      res,
+      preflight.httpStatus,
+      preflight.code,
+      preflight.message,
+      preflight.details
     );
   }
 
@@ -716,6 +819,8 @@ app.post("/api/admin/mission-generation/runs", requireApiToken, (req, res) => {
     run.error = error instanceof Error ? error.message : String(error);
     activeGenerationRunId = null;
     addRunLog(run, "system", run.error);
+  } finally {
+    generationStartupInProgress = false;
   }
 
   return res.status(202).json({ run: serializeRun(run) });

@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+import os
+from dataclasses import dataclass, field
 from typing import Any
 
 
@@ -88,7 +89,7 @@ class RuntimeConfig:
 
     provider: str = "openai"
     api: str = "responses"
-    model: str = "gpt-5.4-nano"
+    model: str = field(default_factory=lambda: os.environ.get("OPENAI_GENERATION_MODEL", "gpt-5.4-nano"))
     reasoning_effort: str = "medium"
     draft_temperature: float = 0.8
     repair_temperature: float = 0.4

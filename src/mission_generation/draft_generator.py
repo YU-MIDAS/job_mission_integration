@@ -40,12 +40,12 @@ class LLMInputPackageBuilder:
 
 
 class MissionDraftGenerator:
-    """llm_input_package를 실제 미션 draft 생성 호출로 넘긴다."""
+    """llm_input_package를 실제 LLM 호출 또는 명시적으로 허용된 mock draft 경로로 넘긴다."""
 
     def __init__(
         self,
         runtime: OpenAIResponsesRuntime | None = None,
-        allow_mock_without_key: bool = True,
+        allow_mock_without_key: bool = False,
         force_mock: bool = False,
     ) -> None:
         self.runtime = runtime or OpenAIResponsesRuntime()
@@ -53,7 +53,7 @@ class MissionDraftGenerator:
         self.force_mock = force_mock
 
     def generate(self, llm_input_package: dict[str, Any]) -> dict[str, Any]:
-        """실제 LLM 또는 mock builder로 mission_output draft를 생성한다."""
+        """기본은 실제 LLM을 사용하고, 옵션으로 허용된 경우에만 mock draft를 생성한다."""
 
         config = self.runtime.config
         if self.force_mock or (not self.runtime.api_key_available() and self.allow_mock_without_key):

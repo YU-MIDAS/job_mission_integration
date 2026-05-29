@@ -63,12 +63,12 @@ class RepairPromptBuilder:
 
 
 class RepairManager:
-    """미션 draft가 validator를 통과하지 못했을 때 LLM 또는 mock repair를 실행한다."""
+    """미션 draft가 validator를 통과하지 못했을 때 실제 LLM 또는 명시적으로 허용된 mock repair를 실행한다."""
 
     def __init__(
         self,
         runtime: OpenAIResponsesRuntime | None = None,
-        allow_mock_without_key: bool = True,
+        allow_mock_without_key: bool = False,
         force_mock: bool = False,
     ) -> None:
         self.runtime = runtime or OpenAIResponsesRuntime()
@@ -81,7 +81,7 @@ class RepairManager:
         repair_request: dict[str, Any],
         json_schema: dict[str, Any],
     ) -> dict[str, Any]:
-        """실제 API repair 또는 로컬 규칙 repair를 수행하고 새 draft를 반환한다."""
+        """기본은 실제 API repair를 사용하고, 옵션으로 허용된 경우에만 로컬 규칙 repair를 수행한다."""
 
         config = self.runtime.config
         if self.force_mock or (not self.runtime.api_key_available() and self.allow_mock_without_key):

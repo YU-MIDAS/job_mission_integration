@@ -50,6 +50,7 @@ class PilotRunner:
         source_root: str | Path = "data/api_raw",
         output_root: str | Path = "outputs",
         force_mock: bool = False,
+        allow_mock_fallback: bool = False,
         concurrency: int = 2,
         target_job_codes: list[str] | None = None,
         target_difficulty_codes: list[str] | None = None,
@@ -61,6 +62,7 @@ class PilotRunner:
         self.source_root = Path(source_root)
         self.output_root = Path(output_root)
         self.force_mock = force_mock
+        self.allow_mock_fallback = allow_mock_fallback
         self.concurrency = max(1, int(concurrency))
         self.target_job_codes = list(target_job_codes) if target_job_codes is not None else None
         self.target_difficulty_codes = list(target_difficulty_codes) if target_difficulty_codes is not None else None
@@ -80,8 +82,14 @@ class PilotRunner:
         self.selector_validator = DecisionSelectorValidator()
         self.constraints_builder = SchemaConstraintsBuilder()
         self.input_builder = LLMInputPackageBuilder()
-        self.draft_generator = MissionDraftGenerator(allow_mock_without_key=True, force_mock=force_mock)
-        self.repair_manager = RepairManager(allow_mock_without_key=True, force_mock=force_mock)
+        self.draft_generator = MissionDraftGenerator(
+            allow_mock_without_key=allow_mock_fallback,
+            force_mock=force_mock,
+        )
+        self.repair_manager = RepairManager(
+            allow_mock_without_key=allow_mock_fallback,
+            force_mock=force_mock,
+        )
         self.validator = MissionValidator()
         self.assembler = FinalMissionAssembler()
         self.storage = StorageAdapter(output_root=self.output_root)
@@ -94,6 +102,8 @@ class PilotRunner:
         pilot_config = self._pilot_config()
         pilot_config["source_root"] = self.source_root.as_posix()
         pilot_config["concurrency"] = self.concurrency
+        pilot_config["force_mock"] = self.force_mock
+        pilot_config["allow_mock_fallback"] = self.allow_mock_fallback
         pilot_config["use_llm_decision_selector"] = self.use_llm_decision_selector
         pilot_config["use_practice_sheet_background"] = self.use_practice_sheet_background
         run_dir = self.storage.create_run(self.runtime_config, pilot_config)
@@ -728,7 +738,11 @@ class PilotRunner:
         )
 
     def _selector_was_locally_skipped(self, call_result: dict[str, Any]) -> bool:
-        """API key 없음/mock처럼 실제 selector 호출 전 skip된 경우만 fallback 대상으로 본다."""
+        """selector 호출 전 skip된 경우만 의사결정 후보를 이전 규칙으로 대체한다.
+
+        이 fallback은 draft/repair mock 생성 허용 여부와 별개이며, 최종 미션 본문은
+        allow_mock_fallback 또는 force_mock이 켜져 있지 않으면 실제 LLM이 필요하다.
+        """
 
         if call_result.get("provider") != "local" or call_result.get("status") != "skipped":
             return False
@@ -819,7 +833,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="미션 생성 v1 pilot을 실행합니다.")
     parser.add_argument("--source-root", default="data/api_raw")
     parser.add_argument("--output-root", default="outputs")
-    parser.add_argument("--mock", action="store_true", help="API key가 있어도 로컬 mock 생성 결과를 사용합니다.")
+    parser.add_argument("--mock", action="store_true", help="Force local mock generation even when OPENAI_API_KEY is set.")
+    parser.add_argument(
+        "--allow-mock-fallback",
+        action="store_true",
+        help="Use local mock generation only when OPENAI_API_KEY is missing. Default is to fail instead.",
+    )
     parser.add_argument("--concurrency", type=int, default=2, help="직무/난이도 target을 동시에 실행할 개수입니다.")
     parser.add_argument("--jobs", type=_parse_codes, default=None, help="실행할 직무 코드를 쉼표로 구분해 입력합니다. 예: K000000997,K000001080")
     parser.add_argument("--difficulties", type=_parse_codes, default=None, help="실행할 난이도 코드를 쉼표로 구분해 입력합니다. 예: normal")
@@ -844,6 +863,7 @@ def main() -> None:
         source_root=args.source_root,
         output_root=args.output_root,
         force_mock=args.mock,
+        allow_mock_fallback=args.allow_mock_fallback,
         concurrency=args.concurrency,
         target_job_codes=args.jobs,
         target_difficulty_codes=args.difficulties,

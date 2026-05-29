@@ -61,6 +61,7 @@ cp .env.example .env
 
 ```env
 OPENAI_API_KEY=sk-...
+OPENAI_GENERATION_MODEL=gpt-5.4-nano
 OPENAI_EVAL_MODEL=gpt-5-nano
 API_SHARED_TOKEN=admin-password
 COMPATIBILITY_SCORE_GAMMA=1.5
@@ -79,6 +80,7 @@ EVALUATE_RATE_LIMIT_MAX=30
 | 환경 변수 | 설명 |
 | --- | --- |
 | `OPENAI_API_KEY` | 미션 생성과 답변 평가에 사용하는 OpenAI API key입니다. |
+| `OPENAI_GENERATION_MODEL` | 관리자 미션 생성과 생성 전 OpenAI preflight에 사용하는 모델입니다. 기본값은 `gpt-5.4-nano`입니다. |
 | `OPENAI_EVAL_MODEL` | 사용자 답변 평가 모델입니다. 기본값은 `gpt-5-nano`입니다. |
 | `API_SHARED_TOKEN` | 관리자 페이지 접속 암호이자 보호된 API 호출 토큰입니다. |
 | `COMPATIBILITY_SCORE_GAMMA` | 직무 추천/적합도 점수 보정값입니다. 기본값은 `1.5`입니다. |
@@ -117,7 +119,7 @@ npm run dev
    - 쉬움
    - 보통
    - 어려움
-5. `미션 생성` 버튼을 누릅니다.
+5. `미션 생성` 버튼을 누릅니다. 서버가 먼저 OpenAI API preflight를 실행하며, 실패하면 Python 생성 프로세스를 시작하지 않습니다.
 6. 생성 상태 타임라인과 원본 로그를 확인합니다.
 7. 하단 미리보기에서 미션 제목, 시나리오, 수행 과제, 참고자료, 신뢰도 점수를 검토합니다.
 8. 마음에 들면 `내보내기 승인`을 누릅니다.
@@ -184,6 +186,12 @@ missions/index.json
 python -u -m src.mission_generation.pilot_runner --jobs K000000997 --difficulties normal --concurrency 1
 ```
 
+By default, CLI mission generation also requires a working OpenAI API call. If `OPENAI_API_KEY` is missing, the run records a failure instead of saving a mock mission. Use `--allow-mock-fallback` only when you intentionally want local mock output for missing-key dry runs, or `--mock` when you want to force mock output even if a key is configured.
+
+```bash
+python -u -m src.mission_generation.pilot_runner --jobs K000000997 --difficulties normal --concurrency 1 --allow-mock-fallback
+```
+
 생성 결과를 사용자 화면용 파일로 내보내려면 run 폴더를 지정합니다.
 
 ```bash
@@ -242,6 +250,7 @@ data/additional_search/{jobCode}.md
 아래 항목을 확인합니다.
 
 - `.env`에 `OPENAI_API_KEY`가 있는지
+- `OPENAI_GENERATION_MODEL` 호출 권한과 OpenAI API 상태가 정상인지
 - `data/api_raw/{jobCode}/`가 있는지
 - `data/additional_search/{jobCode}.md`가 있는지
 - Python 명령이 실행 가능한지
