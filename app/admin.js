@@ -15,7 +15,9 @@ const state = {
   exporting: false,
   deletingRun: false,
   rawLogOpen: false,
-  jobsScrollTop: 0
+  apiStatus: null,
+  jobsScrollTop: 0,
+  rawLogScrollTop: 0
 };
 
 let pollTimer = null;
@@ -105,6 +107,22 @@ function formatScore(score) {
   const n = Number(score);
   if (!Number.isFinite(n)) return "-";
   return n <= 1 ? n.toFixed(2) : Math.round(n).toString();
+}
+
+function apiConfigured() {
+  return Boolean(state.apiStatus?.configured);
+}
+
+function apiKeyStatusText() {
+  return apiConfigured() ? "OpenAI API 설정됨" : "OpenAI API 미설정";
+}
+
+function runApiUsageText(run) {
+  const value = run?.summary?.openai_api_called;
+  if (value === true) return "사용";
+  if (value === false) return "미사용";
+  if (run?.status === "running") return "확인 중";
+  return apiConfigured() ? "대기" : "미설정";
 }
 
 function scorePercent(score) {
@@ -240,9 +258,11 @@ function renderAuth() {
 
 function renderTopbar() {
   const runStatus = state.run ? statusText(state.run.status) : "대기";
+  const apiClass = apiConfigured() ? "good" : "warn";
   return `<div class="topbar">
     <div class="brand">JOB<span>SIM</span> Admin</div>
     <span class="status-pill good">토큰 활성</span>
+    <span class="status-pill ${apiClass}">${apiKeyStatusText()}</span>
     <span class="status-pill hide-sm">상태: ${esc(runStatus)}</span>
     <div class="spacer"></div>
     <a class="btn" href="./">사용자 화면</a>
@@ -511,6 +531,8 @@ function renderPreview() {
         <div class="metric"><div class="metric-k">Fails</div><div class="metric-v">${preview.fail_count}</div></div>
         <div class="metric"><div class="metric-k">상태</div><div class="metric-v">${esc(statusText(state.run.status))}</div></div>
         <div class="metric"><div class="metric-k">자료</div><div class="metric-v">${preview.materials_count}</div></div>
+        <div class="metric"><div class="metric-k">API 호출</div><div class="metric-v">${esc(runApiUsageText(state.run))}</div></div>
+        <div class="metric"><div class="metric-k">평가 모델</div><div class="metric-v">${esc(state.apiStatus?.eval_model || "-")}</div></div>
       </div>
       <div class="section-label">내보내기 검증</div>
       ${validation ? `<div class="scenario">${validation.ok
@@ -541,6 +563,7 @@ function bindAppEvents() {
     state.authError = "";
     state.run = null;
     state.rawLogOpen = false;
+    state.rawLogScrollTop = 0;
     state.deletingRun = false;
     stopPolling();
     renderAuth();
@@ -583,6 +606,14 @@ function bindAppEvents() {
   document.querySelector(".raw-log")?.addEventListener("toggle", (event) => {
     state.rawLogOpen = event.currentTarget.open;
   });
+
+  const logBox = document.querySelector(".log-box");
+  if (logBox) {
+    logBox.scrollTop = state.rawLogScrollTop;
+    logBox.addEventListener("scroll", () => {
+      state.rawLogScrollTop = logBox.scrollTop;
+    }, { passive: true });
+  }
 }
 
 async function loadJobs() {
@@ -591,6 +622,7 @@ async function loadJobs() {
   try {
     const data = await requestJson("/api/admin/mission-generation/jobs");
     state.jobs = data.jobs || [];
+    state.apiStatus = data.openai || null;
     state.authenticated = true;
     const firstEnabled = state.jobs.find((job) => job.enabled);
     if (!state.selectedJobCode && firstEnabled) state.selectedJobCode = firstEnabled.jobCode;
@@ -612,6 +644,7 @@ async function startRun() {
   if (!job?.enabled) return;
   state.startingRun = true;
   state.rawLogOpen = false;
+  state.rawLogScrollTop = 0;
   renderApp();
   try {
     const data = await requestJson("/api/admin/mission-generation/runs", {
@@ -676,6 +709,7 @@ async function deleteRun() {
     });
     state.run = null;
     state.rawLogOpen = false;
+    state.rawLogScrollTop = 0;
     stopPolling();
   } catch (error) {
     state.run.error = error.message;

@@ -98,6 +98,12 @@ type GenerationRun = {
   exportResult?: ExportResult;
 };
 
+type OpenAiAdminStatus = {
+  configured: boolean;
+  eval_model: string;
+  generation_api_key_env: "OPENAI_API_KEY";
+};
+
 const evaluateRateBuckets = new Map<string, RateLimitBucket>();
 const generationRuns = new Map<string, GenerationRun>();
 let lastLogCleanupAt = 0;
@@ -246,6 +252,14 @@ function findLatestRunDir(startedAtMs: number) {
 
 function loadJsonFile<T = unknown>(filePath: string): T {
   return JSON.parse(fs.readFileSync(filePath, "utf8")) as T;
+}
+
+function openAiAdminStatus(): OpenAiAdminStatus {
+  return {
+    configured: Boolean(process.env.OPENAI_API_KEY),
+    eval_model: OPENAI_EVAL_MODEL,
+    generation_api_key_env: "OPENAI_API_KEY"
+  };
 }
 
 function buildMissionPreview(runDir: string): MissionPreview | null {
@@ -601,7 +615,8 @@ app.get("/api/admin/mission-generation/jobs", requireApiToken, (_req, res) => {
     jobs,
     total: jobs.length,
     enabled_count: jobs.filter((job) => job.enabled).length,
-    api_token_required: Boolean(API_SHARED_TOKEN)
+    api_token_required: Boolean(API_SHARED_TOKEN),
+    openai: openAiAdminStatus()
   });
 });
 
